@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Film = {
   name: string,
   posterImage: string,
