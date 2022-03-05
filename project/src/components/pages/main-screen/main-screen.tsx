@@ -1,7 +1,7 @@
 import React from 'react';
-import FilmCard from '../film-card/film-card';
-import FilmPromo from '../film-promo/film-promo';
-import PageFooter from '../page-footer/page-footer';
+import FilmCard from '../../film-card/film-card';
+import FilmPromo from '../../film-promo/film-promo';
+import PageFooter from '../../page-footer/page-footer';
 
 type Film = {
   name: string,

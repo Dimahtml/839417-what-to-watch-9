@@ -1,11 +1,12 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import MainScreen from '../main-screen/main-screen';
-import AddReviewScreen from '../add-review-screen/add-review-screen';
-import MovieScreen from '../movie-screen/movie-screen';
-import MyListScreen from '../my-list-screen/my-list-screen';
-import PlayerScreen from '../player-screen/player-screen';
-import SignInScreen from '../sign-in-screen/sign-in-screen';
+import MainScreen from '../pages/main-screen/main-screen';
+import AddReviewScreen from '../pages/add-review-screen/add-review-screen';
+import MovieScreen from '../pages/movie-screen/movie-screen';
+import MyListScreen from '../pages/my-list-screen/my-list-screen';
+import PlayerScreen from '../pages/player-screen/player-screen';
+import SignInScreen from '../pages/sign-in-screen/sign-in-screen';
+import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 
 type Film = {
   name: string,
@@ -69,6 +70,12 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.SignIn}
           element={<SignInScreen />}
+        />
+      </Routes>
+      <Routes>
+        <Route
+          path="*"
+          element={<NotFoundScreen />}
         />
       </Routes>
     </BrowserRouter>
