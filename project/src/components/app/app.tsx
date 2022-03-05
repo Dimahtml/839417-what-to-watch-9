@@ -38,21 +38,9 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainScreen promoFilm={promoFilm} films={films} />}
-        />
-      </Routes>
-      <Routes>
-        <Route
-          path={AppRoute.AddReview}
-          element={<AddReviewScreen film={promoFilm} />}
-        />
-      </Routes>
-      <Routes>
+        <Route path={AppRoute.Main} element={<MainScreen promoFilm={promoFilm} films={films} />} />
+        <Route path={AppRoute.AddReview} element={<AddReviewScreen film={promoFilm} />} />
         <Route path={AppRoute.Film} element={<MovieScreen film={promoFilm} similarFilms={films} />} />
-      </Routes>
-      <Routes>
         <Route
           path={AppRoute.MyList}
           element={
@@ -61,15 +49,9 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-      </Routes>
-      <Routes>
         <Route path={AppRoute.Player} element={<PlayerScreen /> } />
-      </Routes>
-      <Routes>
         <Route path={AppRoute.SignIn} element={<SignInScreen />} />
-      </Routes>
-      <Routes>
-        <Route element={<NotFoundScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>
   );
