@@ -8,30 +8,11 @@ import PlayerScreen from '../pages/player-screen/player-screen';
 import SignInScreen from '../pages/sign-in-screen/sign-in-screen';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-
-type Film = {
-  name: string,
-  posterImage: string,
-  previewImage: string,
-  backgroundImage: string,
-  backgroundColor: string,
-  description: string,
-  rating: number,
-  scoresCount: number,
-  director: string,
-  starring: string[],
-  runTime: number,
-  genre: string,
-  released: number,
-  id: number,
-  isFavorite: boolean,
-  videoLink: string,
-  previewVideoLink: string,
-}
+import { Film, Films } from '../../mocks/films';
 
 type AppScreenProps = {
   promoFilm: Film;
-  films: Film[];
+  films: Films;
 }
 
 function App({promoFilm, films}: AppScreenProps): JSX.Element {
@@ -49,7 +30,7 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Player} element={<PlayerScreen /> } />
+        <Route path={AppRoute.Player} element={<PlayerScreen />} />
         <Route path={AppRoute.SignIn} element={<SignInScreen />} />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
