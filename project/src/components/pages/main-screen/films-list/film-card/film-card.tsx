@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Film } from '../../../../../mocks/films';
 
 type FilmCardProps = {
@@ -5,8 +7,18 @@ type FilmCardProps = {
 };
 
 function FilmCard({film}: FilmCardProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isActive, setActive] = useState(false);
+
+  const mouseEnterHandler = () => setActive(true);
+  const mouseLeaveHandler = () => setActive(false);
+
   return (
-    <article className="small-film-card catalog__films-card">
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
+    >
       <div className="small-film-card__image">
         <img
           src={film.previewImage}
@@ -16,7 +28,9 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{film.name}</a>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>
+          {film.name}
+        </Link>
       </h3>
     </article>
   );
