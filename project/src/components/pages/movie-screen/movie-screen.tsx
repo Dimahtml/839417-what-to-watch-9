@@ -1,21 +1,27 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import FilmCard from '../main-screen/films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
-import { Film, Films } from '../../../mocks/films';
+import { Film, FILMS } from '../../../mocks/films';
 
-type MovieScreenProps = {
-  film: Film;
-  similarFilms: Films;
-}
+// type MovieScreenProps = {
+//   film: Film;
+//   similarFilms: Films;
+// }
 
-function MovieScreen({film, similarFilms}: MovieScreenProps): JSX.Element {
+function MovieScreen(): JSX.Element {
+  const { id } = useParams<{id: string}>();
+  const filmId = Number(id);
+  const film = FILMS[filmId - 1];
+  const similarFilms = FILMS.slice(0, 3);
+
   return (
     <React.Fragment>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -110,7 +116,7 @@ function MovieScreen({film, similarFilms}: MovieScreenProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {similarFilms.map((similarFilm: Film) => <FilmCard film={similarFilm} key={film.id}/>)}
+            {similarFilms.map((similarFilm: Film) => <FilmCard film={similarFilm} key={similarFilm.id}/>)}
 
             <article className="small-film-card catalog__films-card">
               <div className="small-film-card__image">
@@ -118,15 +124,6 @@ function MovieScreen({film, similarFilms}: MovieScreenProps): JSX.Element {
               </div>
               <h3 className="small-film-card__title">
                 <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
               </h3>
             </article>
           </div>
