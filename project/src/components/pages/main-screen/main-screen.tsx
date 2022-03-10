@@ -2,26 +2,7 @@ import React from 'react';
 import FilmCard from '../../film-card/film-card';
 import FilmPromo from '../../film-promo/film-promo';
 import PageFooter from '../../page-footer/page-footer';
-
-type Film = {
-  name: string,
-  posterImage: string,
-  previewImage: string,
-  backgroundImage: string,
-  backgroundColor: string,
-  description: string,
-  rating: number,
-  scoresCount: number,
-  director: string,
-  starring: string[],
-  runTime: number,
-  genre: string,
-  released: number,
-  id: number,
-  isFavorite: boolean,
-  videoLink: string,
-  previewVideoLink: string,
-}
+import { Film } from '../../../mocks/films';
 
 type MainScreenProps = {
   promoFilm: Film;
