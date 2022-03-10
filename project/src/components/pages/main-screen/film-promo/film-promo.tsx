@@ -1,28 +1,17 @@
-type Film = {
-  name: string,
-  posterImage: string,
-  previewImage: string,
-  backgroundImage: string,
-  backgroundColor: string,
-  description: string,
-  rating: number,
-  scoresCount: number,
-  director: string,
-  starring: string[],
-  runTime: number,
-  genre: string,
-  released: number,
-  id: number,
-  isFavorite: boolean,
-  videoLink: string,
-  previewVideoLink: string,
-}
+import { useNavigate } from 'react-router-dom';
+import { Film } from '../../../../mocks/films';
+import { AppRoute } from '../../../../const';
+import UserBlock from '../../../user-block/user-block';
 
 type FilmPromoProps = {
   promoFilm: Film;
 };
 
 function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
+  const navigate = useNavigate();
+  const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
+  const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -33,23 +22,13 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
 
       <header className="page-header film-card__head">
         <div className="logo">
-          <a href="/" className="logo__link">
+          <div className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </div>
         </div>
-
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </li>
-          <li className="user-block__item">
-            <a href="/" className="user-block__link">Sign out</a>
-          </li>
-        </ul>
+        <UserBlock />
       </header>
 
       <div className="film-card__wrap">
@@ -66,13 +45,21 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <button
+                className="btn btn--play film-card__button"
+                type="button"
+                onClick={onPlayerBtnClickHandler}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
               </button>
-              <button className="btn btn--list film-card__button" type="button">
+              <button
+                className="btn btn--list film-card__button"
+                type="button"
+                onClick={onMyListBtnClickHandler}
+              >
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
                 </svg>
