@@ -18,6 +18,8 @@ type Film = {
   previewVideoLink: string,
 }
 
+type Films = Film[];
+
 const PROMO_FILM: Film =
 {
   name: 'The Revenant',
@@ -43,7 +45,7 @@ const PROMO_FILM: Film =
   previewVideoLink: 'https://9.react.pages.academy/static/film/video/dog.mp4',
 };
 
-const FILMS: Film[] =
+const FILMS: Films =
 [
   {
     name: 'The Revenant',
@@ -508,4 +510,4 @@ const FILMS: Film[] =
 ];
 
 export { PROMO_FILM, FILMS };
-export type { Film };
+export type { Film, Films };

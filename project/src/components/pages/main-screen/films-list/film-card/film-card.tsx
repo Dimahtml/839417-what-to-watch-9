@@ -1,4 +1,4 @@
-import { Film } from '../../mocks/films';
+import { Film } from '../../../../../mocks/films';
 
 type FilmCardProps = {
   film: Film;

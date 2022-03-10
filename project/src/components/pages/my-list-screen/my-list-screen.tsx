@@ -1,29 +1,10 @@
-import FilmCard from '../../film-card/film-card';
+import FilmCard from '../main-screen/films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
-
-type Film = {
-  name: string,
-  posterImage: string,
-  previewImage: string,
-  backgroundImage: string,
-  backgroundColor: string,
-  description: string,
-  rating: number,
-  scoresCount: number,
-  director: string,
-  starring: string[],
-  runTime: number,
-  genre: string,
-  released: number,
-  id: number,
-  isFavorite: boolean,
-  videoLink: string,
-  previewVideoLink: string,
-}
+import { Film, Films } from '../../../mocks/films';
 
 type MyListScreenProps = {
-  films: Film[];
+  films: Films;
 }
 
 function MyListScreen({films}: MyListScreenProps): JSX.Element {
