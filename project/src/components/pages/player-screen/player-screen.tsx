@@ -1,9 +1,21 @@
+import { useNavigate } from 'react-router-dom';
+
 function PlayerScreen(): JSX.Element {
+  const navigate = useNavigate();
+
+  const onExitBtnClickHandler = () => navigate(-1);
+
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button
+        type="button"
+        className="player__exit"
+        onClick={onExitBtnClickHandler}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">
