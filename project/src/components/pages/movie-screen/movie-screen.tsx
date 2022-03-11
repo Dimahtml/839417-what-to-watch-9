@@ -10,8 +10,8 @@ import { Film, FILMS } from '../../../mocks/films';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
-  const filmId = Number(id);
-  const film = FILMS[filmId - 1];
+  const film = FILMS[Number(id) - 1];
+  // временно определяем similarFilms пока нет запроса к серверу
   const similarFilms = FILMS.slice(0, 3);
 
   return (

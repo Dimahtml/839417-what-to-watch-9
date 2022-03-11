@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
-import { Film } from '../../../mocks/films';
+import { Link, useParams } from 'react-router-dom';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import ReviewForm from './review-form/review-form';
+import { FILMS } from '../../../mocks/films';
 
-type AddReviewScreenProps = {
-  film: Film;
-}
+function AddReviewScreen(): JSX.Element {
+  const { id } = useParams<{id: string}>();
+  const film = FILMS[Number(id) - 1];
 
-function AddReviewScreen({film}: AddReviewScreenProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
