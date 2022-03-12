@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Film } from '../../../../../mocks/films';
+import { Film } from '../../../../../types/types';
 
 type FilmCardProps = {
   film: Film;

@@ -8,7 +8,7 @@ import PlayerScreen from '../pages/player-screen/player-screen';
 import SignInScreen from '../pages/sign-in-screen/sign-in-screen';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Film, Films } from '../../mocks/films';
+import { Film, Films } from '../../types/types';
 
 type AppScreenProps = {
   promoFilm: Film;

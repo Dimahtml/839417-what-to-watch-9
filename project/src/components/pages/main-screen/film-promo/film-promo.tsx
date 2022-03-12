@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Film } from '../../../../mocks/films';
+import { Film } from '../../../../types/types';
 import { AppRoute } from '../../../../const';
 import UserBlock from '../../../user-block/user-block';
 
