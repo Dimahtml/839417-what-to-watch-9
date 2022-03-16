@@ -2,9 +2,10 @@ import React, { ChangeEvent } from 'react';
 
 type RatingInputsProps = {
   onRatingChange: (value: number) => void;
+  defaultRating: number;
 }
 
-function RatingInputs({onRatingChange}: RatingInputsProps): JSX.Element {
+function RatingInputs({onRatingChange, defaultRating}: RatingInputsProps): JSX.Element {
 
   const onChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => onRatingChange(Number(evt.target.value));
 
@@ -22,6 +23,7 @@ function RatingInputs({onRatingChange}: RatingInputsProps): JSX.Element {
                 name="rating"
                 value={currentId}
                 onChange={onChangeHandler}
+                checked={currentId === defaultRating}
               />
               <label className="rating__label" htmlFor={currentId.toString()}>
                 Rating {currentId}
