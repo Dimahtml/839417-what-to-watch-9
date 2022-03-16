@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Film } from '../../../../types/types';
 import { AppRoute } from '../../../../const';
 import UserBlock from '../../../user-block/user-block';
+import Logo from '../../../logo/logo';
 
 type FilmPromoProps = {
   promoFilm: Film;
@@ -22,13 +23,7 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header film-card__head">
-        <div className="logo">
-          <div className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </div>
-        </div>
+        <Logo isDisabled />
         <UserBlock />
       </header>
 
