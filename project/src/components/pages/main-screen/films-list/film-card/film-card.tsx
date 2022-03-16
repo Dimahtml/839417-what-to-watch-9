@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import VideoPlayer from '../../../../video-player/video-player';
 import { Film } from '../../../../../types/types';
 
 type FilmCardProps = {
@@ -7,7 +8,6 @@ type FilmCardProps = {
 };
 
 function FilmCard({film}: FilmCardProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isActive, setActive] = useState(false);
 
   const mouseEnterHandler = () => setActive(true);
@@ -20,11 +20,13 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
       onMouseLeave={mouseLeaveHandler}
     >
       <div className="small-film-card__image">
-        <img
-          src={film.previewImage}
-          alt={film.name}
-          width="280"
-          height="175"
+        <VideoPlayer
+          isPlaying={isActive}
+          src={film.previewVideoLink}
+          poster={film.previewImage}
+          width={280}
+          height={175}
+          muted
         />
       </div>
       <h3 className="small-film-card__title">
