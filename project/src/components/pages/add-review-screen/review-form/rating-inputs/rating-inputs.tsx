@@ -2,17 +2,18 @@ import React, { ChangeEvent } from 'react';
 
 type RatingInputsProps = {
   onRatingChange: (value: number) => void;
-  defaultRating: number;
+  maxRating: number;
+  initialRating: number;
 }
 
-function RatingInputs({onRatingChange, defaultRating}: RatingInputsProps): JSX.Element {
+function RatingInputs({onRatingChange, maxRating, initialRating}: RatingInputsProps): JSX.Element {
 
   const onChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => onRatingChange(Number(evt.target.value));
 
   return (
     <div className="rating__stars">
       {
-        Array.from({length: 10}).map((_, index, arr) => {
+        Array.from({length: maxRating}).map((_, index, arr) => {
           const currentId = arr.length - index;
           return (
             <React.Fragment key={currentId}>
@@ -23,9 +24,9 @@ function RatingInputs({onRatingChange, defaultRating}: RatingInputsProps): JSX.E
                 name="rating"
                 value={currentId}
                 onChange={onChangeHandler}
-                checked={currentId === defaultRating}
+                checked={currentId === initialRating}
               />
-              <label className="rating__label" htmlFor={currentId.toString()}>
+              <label className="rating__label" htmlFor={String(currentId)} >
                 Rating {currentId}
               </label>
             </React.Fragment>

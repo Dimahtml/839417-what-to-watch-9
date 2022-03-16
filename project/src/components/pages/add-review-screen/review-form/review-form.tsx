@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import RatingInputs from './rating-inputs/rating-inputs';
 
+const MAX_RATING = 10;
+const INITIAL_RATING = 8;
+
 function ReviewForm(): JSX.Element {
-  const [rating, setRating] = useState(8);
+  const [rating, setRating] = useState(INITIAL_RATING);
   const [message, setMessage] = useState('');
 
-  const defaultRating = rating;
   const onTextareaChangeHandler = (evt: ChangeEvent<HTMLTextAreaElement>) => setMessage(evt.target.value);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -19,7 +21,7 @@ function ReviewForm(): JSX.Element {
   return (
     <form action="#" className="add-review__form" onSubmit={handleSubmit} >
       <div className="rating">
-        <RatingInputs onRatingChange={setRating} defaultRating={defaultRating} />
+        <RatingInputs maxRating={MAX_RATING} initialRating={rating} onRatingChange={setRating} />
       </div>
 
       <div className="add-review__text">
