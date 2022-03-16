@@ -6,7 +6,8 @@ import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import FilmControl from './film-control/film-control';
 import FilmInfo from './film-info/film-info';
-import { Film, FILMS } from '../../../mocks/films';
+import { FILMS } from '../../../mocks/films';
+import { Film } from '../../../types/types';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
