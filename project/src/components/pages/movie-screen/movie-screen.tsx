@@ -1,13 +1,12 @@
 import React, { useState, MouseEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import FilmCard from '../main-screen/films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import FilmControl from './film-control/film-control';
 import Tabs from './tabs/tabs';
+import FilmsList from '../../films-list/films-list';
 import { FILMS } from '../../../mocks/films';
-import { Film } from '../../../types/films';
 import { TABS } from './tabs/tabs';
 
 function MovieScreen(): JSX.Element {
@@ -68,9 +67,7 @@ function MovieScreen(): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__films-list">
-            {similarFilms.map((similarFilm: Film) => <FilmCard film={similarFilm} key={similarFilm.id}/>)}
-          </div>
+          <FilmsList films={similarFilms} />
         </section>
         <PageFooter />
       </div>

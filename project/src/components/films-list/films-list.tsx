@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Film, Films } from '../../../../types/films';
+import { Film, Films } from '../../types/films';
 import FilmCard from './film-card/film-card';
 
 type FilmsListProps = {

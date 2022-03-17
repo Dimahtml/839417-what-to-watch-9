@@ -4,7 +4,6 @@ import TabsContent from './tabs-content/tabs-content';
 import { REVIEWS } from '../../../../mocks/reviews';
 import { Film } from '../../../../types/films';
 
-// type TABS = 'Overview' | 'Details' | 'Reviews';
 type TABS = string;
 
 type TabsProps = {
