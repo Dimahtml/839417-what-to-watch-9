@@ -1,6 +1,6 @@
 import React from 'react';
-import { Film, Films } from '../../../types/types';
-import FilmsList from './films-list/films-list';
+import { Film, Films } from '../../../types/films';
+import FilmsList from '../../films-list/films-list';
 import FilmPromo from './film-promo/film-promo';
 import PageFooter from '../../page-footer/page-footer';
 import GenresList from './genres-list/genres-list';

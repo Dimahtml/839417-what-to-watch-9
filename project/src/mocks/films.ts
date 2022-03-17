@@ -1,4 +1,4 @@
-import { Film, Films } from '../types/types';
+import { Film, Films } from '../types/films';
 
 const PROMO_FILM: Film =
 {
