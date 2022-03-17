@@ -1,8 +1,8 @@
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import TabsContent from './tabs-content/tabs-content';
-import { REVIEWS } from '../../../../../mocks/reviews';
-import { Film } from '../../../../../types/films';
+import { REVIEWS } from '../../../../mocks/reviews';
+import { Film } from '../../../../types/films';
 
 // type TABS = 'Overview' | 'Details' | 'Reviews';
 type TABS = string;
@@ -15,7 +15,7 @@ type TabsProps = {
 
 function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
   return (
-    <>
+    <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           <li className={`film-nav__item ${activeTab === 'Overview' ? 'film-nav__item--active' : ''}`}>
@@ -31,7 +31,7 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
       </nav>
 
       <TabsContent activeTab={activeTab} film={film} reviews={REVIEWS} />
-    </>
+    </div>
   );
 }
 

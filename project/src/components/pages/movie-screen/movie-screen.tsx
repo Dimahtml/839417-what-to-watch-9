@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import FilmCard from '../main-screen/films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import FilmControl from './film-control/film-control';
-import FilmInfo from './film-info/film-info';
+import Tabs from './tabs/tabs';
 import { FILMS } from '../../../mocks/films';
 import { Film } from '../../../types/films';
+import { TABS } from './tabs/tabs';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
   const film = FILMS[Number(id) - 1];
   // временно определяем similarFilms пока нет запроса к серверу
   const similarFilms = FILMS.slice(0, 3);
+
+  const [activeTab, setActiveTab] = useState<TABS>('Overview');
+
+  const onClickHandler = (evt: MouseEvent): void => {
+    const target = evt.target as HTMLElement;
+    if (target.textContent) {
+      setActiveTab(target.textContent);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -49,7 +59,7 @@ function MovieScreen(): JSX.Element {
               <img src={film.posterImage} alt="{film.name} poster" width="218" height="327" />
             </div>
 
-            <FilmInfo film={film} />
+            <Tabs activeTab={activeTab} film={film} onClickHandler={onClickHandler} />
           </div>
         </div>
       </section>

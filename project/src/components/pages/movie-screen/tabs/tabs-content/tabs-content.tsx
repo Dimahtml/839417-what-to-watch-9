@@ -1,43 +1,13 @@
-/* eslint-disable no-console */
 import React from 'react';
-import { Film } from '../../../../../../types/films';
-import { Reviews } from '../../../../../../types/reviews';
+import { Film } from '../../../../../types/films';
+import { Reviews } from '../../../../../types/reviews';
 import FilmReview from './film-review/film-review';
+import { getFilmRating, getFormattedRuntime } from '../../../../../utils';
 
 type TabsContentProps = {
   activeTab: string;
   film: Film;
   reviews: Reviews;
-};
-
-const getFilmRating = (mark: string | number): string => {
-  mark = Number(mark);
-  if (mark < 3) {
-    return 'Bad';
-  } else if (mark < 5) {
-    return 'Normal';
-  } else if (mark < 8) {
-    return 'Good';
-  } else if (mark < 10) {
-    return 'Very Good';
-  } else {
-    return 'Awesome';
-  }
-};
-
-const getFormattedRuntime = (durationInMinutes: number): string => {
-  const minutesInHour = 60;
-  let result: string;
-  const minutes: number = (durationInMinutes) % minutesInHour;
-
-  if (durationInMinutes >= minutesInHour) {
-    const hours: number = Math.floor(durationInMinutes / minutesInHour);
-    result = `${hours}h ${minutes}m`;
-    return result;
-  }
-
-  result = `${minutes}m`;
-  return result;
 };
 
 function TabsContent({activeTab, film, reviews}: TabsContentProps): JSX.Element {
@@ -104,22 +74,15 @@ function TabsContent({activeTab, film, reviews}: TabsContentProps): JSX.Element 
     );
   }
 
-  const reviews1: Reviews = reviews.slice(0, reviews.length / 2);
-  const reviews2: Reviews = reviews.slice(reviews.length / 2, reviews.length);
-
-  console.log(reviews);
-  console.log(reviews1);
-  console.log(reviews2);
-
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews1.map((review) => (
+        {reviews.slice(0, reviews.length / 2).map((review) => (
           <FilmReview review={review} key={review.id}/>
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {reviews2.map((review) => (
+        {reviews.slice(reviews.length / 2, reviews.length).map((review) => (
           <FilmReview review={review} key={review.id}/>
         ))}
       </div>

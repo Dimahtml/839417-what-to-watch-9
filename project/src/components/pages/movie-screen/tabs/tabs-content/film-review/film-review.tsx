@@ -1,5 +1,5 @@
-import { Review } from '../../../../../../../types/reviews';
-import { getFormattedDate, getFormattedDatetime } from '../../../../../../../utils';
+import { Review } from '../../../../../../types/reviews';
+import { getFormattedDate, getFormattedDatetime } from '../../../../../../utils';
 
 type FilmReviewProps = {
   review: Review;
