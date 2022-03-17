@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Film } from '../../../../types/types';
+import { Film } from '../../../../types/films';
 import { AppRoute } from '../../../../const';
 
 type FilmControlProps = {

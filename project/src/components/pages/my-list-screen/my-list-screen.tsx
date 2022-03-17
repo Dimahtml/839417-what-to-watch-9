@@ -1,7 +1,7 @@
 import FilmCard from '../main-screen/films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
-import { Film, Films } from '../../../types/types';
+import { Film, Films } from '../../../types/films';
 
 type MyListScreenProps = {
   films: Films;
