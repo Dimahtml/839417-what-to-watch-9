@@ -11,11 +11,10 @@ import { TABS } from './tabs/tabs';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
-  const film = FILMS[Number(id) - 1];
-  // временно определяем similarFilms пока нет запроса к серверу
-  const similarFilms = FILMS.slice(0, 3);
-
   const [activeTab, setActiveTab] = useState<TABS>('Overview');
+
+  const film = FILMS[Number(id) - 1];
+  const similarFilms = FILMS.filter((item) => item.genre === film.genre);
 
   const onClickHandler = (evt: MouseEvent): void => {
     const target = evt.target as HTMLElement;
