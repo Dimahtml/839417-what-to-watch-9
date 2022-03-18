@@ -3,10 +3,10 @@ import React, { ChangeEvent } from 'react';
 type RatingInputsProps = {
   onRatingChange: (value: number) => void;
   maxRating: number;
-  initialRating: number;
+  rating: number;
 }
 
-function RatingInputs({onRatingChange, maxRating, initialRating}: RatingInputsProps): JSX.Element {
+function RatingInputs({onRatingChange, maxRating, rating}: RatingInputsProps): JSX.Element {
 
   const onChangeHandler = (evt: ChangeEvent<HTMLInputElement>) => onRatingChange(Number(evt.target.value));
 
@@ -24,7 +24,7 @@ function RatingInputs({onRatingChange, maxRating, initialRating}: RatingInputsPr
                 name="rating"
                 value={currentId}
                 onChange={onChangeHandler}
-                checked={currentId === initialRating}
+                checked={currentId === rating}
               />
               <label className="rating__label" htmlFor={String(currentId)} >
                 Rating {currentId}

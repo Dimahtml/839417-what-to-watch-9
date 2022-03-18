@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import TabsContent from './tabs-content/tabs-content';
 import { REVIEWS } from '../../../../mocks/reviews';
 import { Film } from '../../../../types/films';
+import { TabTitle } from '../../../../const';
 
-type TABS = string;
+// type TABS = string;
 
 type TabsProps = {
-  activeTab: TABS;
+  activeTab: TabTitle;
   film: Film;
-  onClickHandler: (evt: MouseEvent) => void;
+  onClickHandler: (evt: MouseEvent, value: TabTitle) => void;
 }
 
 function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
@@ -18,13 +19,31 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           <li className={`film-nav__item ${activeTab === 'Overview' ? 'film-nav__item--active' : ''}`}>
-            <Link to="" className="film-nav__link" onClick={onClickHandler} >Overview</Link>
+            <Link
+              to=""
+              className="film-nav__link"
+              onClick={(evt) => onClickHandler(evt, TabTitle.Overview)}
+            >
+              Overview
+            </Link>
           </li>
           <li className={`film-nav__item ${activeTab === 'Details' ? 'film-nav__item--active' : ''}`}>
-            <Link to="" className="film-nav__link" onClick={onClickHandler}>Details</Link>
+            <Link
+              to=""
+              className="film-nav__link"
+              onClick={(evt) => onClickHandler(evt, TabTitle.Details)}
+            >
+              Details
+            </Link>
           </li>
           <li className={`film-nav__item ${activeTab === 'Reviews' ? 'film-nav__item--active' : ''}`}>
-            <Link to="" className="film-nav__link" onClick={onClickHandler}>Reviews</Link>
+            <Link
+              to=""
+              className="film-nav__link"
+              onClick={(evt) => onClickHandler(evt, TabTitle.Reviews)}
+            >
+              Reviews
+            </Link>
           </li>
         </ul>
       </nav>
@@ -35,4 +54,4 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
 }
 
 export default Tabs;
-export type { TABS };
+// export type { TABS };

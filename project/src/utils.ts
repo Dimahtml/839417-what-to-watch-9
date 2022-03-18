@@ -1,4 +1,4 @@
-// Функция для перевода строкового значения даты в формат, используемый в комментарии на странице review-film
+// Функция для перевода строкового значения даты в формат
 export const getFormattedDate = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
   const year : string = currentDate.getFullYear().toString();
@@ -8,7 +8,7 @@ export const getFormattedDate = (initialDate: string): string => {
   return `${month} ${day}, ${year}`;
 };
 
-// Функция для перевода строкового значения даты в формат, используемый в атрибуте dateTime
+// Функция для перевода строкового значения даты в формат
 export const getFormattedDatetime = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
   const year : string = currentDate.toLocaleString('en', {year: 'numeric'});

@@ -3,9 +3,10 @@ import { Film } from '../../../../../types/films';
 import { Reviews } from '../../../../../types/reviews';
 import FilmReview from './film-review/film-review';
 import { getFilmRating, getFormattedRuntime } from '../../../../../utils';
+import { TabTitle } from '../../../../../const';
 
 type TabsContentProps = {
-  activeTab: string;
+  activeTab: TabTitle;
   film: Film;
   reviews: Reviews;
 };
