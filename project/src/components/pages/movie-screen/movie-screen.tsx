@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
@@ -9,18 +8,16 @@ import Tabs from './tabs/tabs';
 import FilmsList from '../../films-list/films-list';
 import { FILMS } from '../../../mocks/films';
 import { Film } from '../../../types/films';
-// import { TABS } from './tabs/tabs';
 import { TabTitle } from '../../../const';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   const film = FILMS[Number(id) - 1];
   const similarFilms = FILMS.filter((item: Film) => item.genre === film.genre);
 
-  const onClickHandler = (evt: MouseEvent, tabTitle: TabTitle): void => {
+  const onClickHandler = (tabTitle: TabTitle): void => {
     setActiveTab(tabTitle);
   };
 

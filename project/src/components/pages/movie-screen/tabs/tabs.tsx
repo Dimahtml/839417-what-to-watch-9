@@ -1,16 +1,13 @@
-import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import TabsContent from './tabs-content/tabs-content';
 import { REVIEWS } from '../../../../mocks/reviews';
 import { Film } from '../../../../types/films';
 import { TabTitle } from '../../../../const';
 
-// type TABS = string;
-
 type TabsProps = {
   activeTab: TabTitle;
   film: Film;
-  onClickHandler: (evt: MouseEvent, value: TabTitle) => void;
+  onClickHandler: (value: TabTitle) => void;
 }
 
 function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
@@ -22,7 +19,7 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
             <Link
               to=""
               className="film-nav__link"
-              onClick={(evt) => onClickHandler(evt, TabTitle.Overview)}
+              onClick={() => onClickHandler(TabTitle.Overview)}
             >
               Overview
             </Link>
@@ -31,7 +28,7 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
             <Link
               to=""
               className="film-nav__link"
-              onClick={(evt) => onClickHandler(evt, TabTitle.Details)}
+              onClick={() => onClickHandler(TabTitle.Details)}
             >
               Details
             </Link>
@@ -40,7 +37,7 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
             <Link
               to=""
               className="film-nav__link"
-              onClick={(evt) => onClickHandler(evt, TabTitle.Reviews)}
+              onClick={() => onClickHandler(TabTitle.Reviews)}
             >
               Reviews
             </Link>
@@ -54,4 +51,3 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
 }
 
 export default Tabs;
-// export type { TABS };
