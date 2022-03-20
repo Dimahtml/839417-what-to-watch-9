@@ -18,7 +18,7 @@ function MainScreen({promoFilm, films}: MainScreenProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList />
+          <GenresList films={films} />
           <FilmsList films={films} />
           <ShowMoreBtn />
         </section>

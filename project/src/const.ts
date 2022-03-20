@@ -20,7 +20,7 @@ export enum TabTitle {
 }
 
 export enum FilmGenre {
-  AllGenres = 'AllGenres',
+  AllGenres = 'All genres',
   Action = 'Action',
   Adventure = 'Adventure',
   Fantasy = 'Fantasy',
