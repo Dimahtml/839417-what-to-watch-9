@@ -18,14 +18,3 @@ export enum TabTitle {
   Details = 'Details',
   Reviews = 'Reviews',
 }
-
-export enum FilmGenre {
-  AllGenres = 'All genres',
-  Action = 'Action',
-  Adventure = 'Adventure',
-  Fantasy = 'Fantasy',
-  Comedy = 'Comedy',
-  Crime = 'Crime',
-  Drama = 'Drama',
-  Thriller = 'Thriller',
-}

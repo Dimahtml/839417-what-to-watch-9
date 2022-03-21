@@ -15,7 +15,7 @@ function MovieScreen(): JSX.Element {
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   const film = FILMS[Number(id) - 1];
-  const similarFilms = FILMS.filter((item: Film) => item.genre === film.genre);
+  const similarFilms = FILMS.filter((item: Film) => item.genre === film.genre && item.id !== film.id);
 
   const onClickHandler = (tabTitle: TabTitle): void => {
     setActiveTab(tabTitle);

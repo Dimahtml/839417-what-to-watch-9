@@ -1,4 +1,6 @@
 import React from 'react';
+import { useAppSelector } from '../../../hooks';
+
 import { Film, Films } from '../../../types/films';
 import FilmsList from '../../films-list/films-list';
 import FilmPromo from './film-promo/film-promo';
@@ -12,6 +14,8 @@ type MainScreenProps = {
 }
 
 function MainScreen({promoFilm, films}: MainScreenProps): JSX.Element {
+  const activeFilms = useAppSelector((state) => state.activeFilms);
+
   return (
     <React.Fragment>
       <FilmPromo promoFilm={promoFilm} />
@@ -19,7 +23,7 @@ function MainScreen({promoFilm, films}: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList films={films} />
-          <FilmsList films={films} />
+          <FilmsList films={activeFilms} />
           <ShowMoreBtn />
         </section>
         <PageFooter />
