@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Films } from '../../../../types/films';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { changeGenre, getActiveFilms } from '../../../../store/action';
+import { changeGenre } from '../../../../store/action';
 
 type GenresListProps = {
   films: Films;
@@ -23,7 +23,6 @@ function GenresList({films}: GenresListProps): JSX.Element {
             key={genreItem}
             onClick={() => {
               dispatch(changeGenre(genreItem));
-              dispatch(getActiveFilms());
             }}
           >
             <Link to={`#${genreItem}`} className="catalog__genres-link">{genreItem}</Link>
