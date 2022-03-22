@@ -12,3 +12,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum TabTitle {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}

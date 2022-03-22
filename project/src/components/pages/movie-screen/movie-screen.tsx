@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
@@ -7,20 +7,18 @@ import FilmControl from './film-control/film-control';
 import Tabs from './tabs/tabs';
 import FilmsList from '../../films-list/films-list';
 import { FILMS } from '../../../mocks/films';
-import { TABS } from './tabs/tabs';
+import { Film } from '../../../types/films';
+import { TabTitle } from '../../../const';
 
 function MovieScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
-  const [activeTab, setActiveTab] = useState<TABS>('Overview');
+  const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   const film = FILMS[Number(id) - 1];
-  const similarFilms = FILMS.filter((item) => item.genre === film.genre);
+  const similarFilms = FILMS.filter((item: Film) => item.genre === film.genre && item.id !== film.id);
 
-  const onClickHandler = (evt: MouseEvent): void => {
-    const target = evt.target as HTMLElement;
-    if (target.textContent) {
-      setActiveTab(target.textContent);
-    }
+  const onClickHandler = (tabTitle: TabTitle): void => {
+    setActiveTab(tabTitle);
   };
 
   return (

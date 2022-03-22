@@ -1,4 +1,6 @@
-// Функция для перевода строкового значения даты в формат, используемый в комментарии на странице review-film
+import { Films } from './types/films';
+
+// Функция для перевода строкового значения даты в формат
 export const getFormattedDate = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
   const year : string = currentDate.getFullYear().toString();
@@ -8,7 +10,7 @@ export const getFormattedDate = (initialDate: string): string => {
   return `${month} ${day}, ${year}`;
 };
 
-// Функция для перевода строкового значения даты в формат, используемый в атрибуте dateTime
+// Функция для перевода строкового значения даты в формат
 export const getFormattedDatetime = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
   const year : string = currentDate.toLocaleString('en', {year: 'numeric'});
@@ -47,4 +49,12 @@ export const getFilmRating = (mark: string | number): string => {
   } else {
     return 'Awesome';
   }
+};
+
+// функция для получения списка фильмов, подходящих по жанру
+export const getActiveFilms = (films: Films, genre: string) => {
+  if (genre === 'All genres') {
+    return films;
+  }
+  return films.filter((film) => film.genre === genre);
 };
