@@ -8,14 +8,7 @@ import PlayerScreen from '../pages/player-screen/player-screen';
 import SignInScreen from '../pages/sign-in-screen/sign-in-screen';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
-import { Film, Films } from '../../types/films';
-
-type AppScreenProps = {
-  promoFilm: Film;
-  films: Films;
-}
-
-function App({promoFilm, films}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -26,7 +19,7 @@ function App({promoFilm, films}: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListScreen films={films} />
+              <MyListScreen />
             </PrivateRoute>
           }
         />

@@ -1,13 +1,13 @@
+import { useAppSelector } from '../../../hooks';
+
 import FilmCard from '../../films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
-import { Film, Films } from '../../../types/films';
+import { Film } from '../../../types/films';
 
-type MyListScreenProps = {
-  films: Films;
-}
+function MyListScreen(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
-function MyListScreen({films}: MyListScreenProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
