@@ -1,5 +1,3 @@
-import { Films } from './types/films';
-
 // Функция для перевода строкового значения даты в формат
 export const getFormattedDate = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
@@ -49,12 +47,4 @@ export const getFilmRating = (mark: string | number): string => {
   } else {
     return 'Awesome';
   }
-};
-
-// функция для получения списка фильмов, подходящих по жанру
-export const getActiveFilms = (films: Films, genre: string) => {
-  if (genre === 'All genres') {
-    return films;
-  }
-  return films.filter((film) => film.genre === genre);
 };

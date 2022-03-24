@@ -18,3 +18,5 @@ export enum TabTitle {
   Details = 'Details',
   Reviews = 'Reviews',
 }
+
+export const FILMS_PER_STEP = 8;
