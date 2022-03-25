@@ -1,17 +1,60 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre } from './action';
-import { FILMS } from '../mocks/films';
+import { changeGenre, loadFilms, loadPromoFilm, loadReviews } from './action';
+import { Film, Films } from '../types/films';
+import { Reviews } from '../types/reviews';
 
-const initialState = {
+const blankFilm = {
+  name: '',
+  posterImage: '',
+  previewImage: '',
+  backgroundImage: '',
+  backgroundColor: '',
+  description: '',
+  rating: 0,
+  scoresCount: 0,
+  director: '',
+  starring: [],
+  runTime: 0,
+  genre: '',
+  released: 0,
+  id: 0,
+  isFavorite: false,
+  videoLink: '',
+  previewVideoLink: '',
+};
+
+type InitalState = {
+  genre: string,
+  films: Films,
+  promoFilm: Film,
+  reviews: Reviews,
+  isDataLoaded: boolean,
+}
+
+const initialState: InitalState = {
   genre: 'All genres',
-  films: FILMS,
-  promoFilm: FILMS[0],
+  films: [],
+  promoFilm: blankFilm,
+  reviews: [],
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+      state.isDataLoaded = true;
     });
 });
 

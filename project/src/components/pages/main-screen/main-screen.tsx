@@ -22,13 +22,12 @@ function MainScreen(): JSX.Element {
     setShowedFilms(activeFilms.slice(0, FILMS_PER_STEP));
   }, [films, activeFilms, genre]);
 
-  const onShowMoreBtnClick: MouseEventHandler<HTMLButtonElement> = () => {
+  const onClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
     setShowedFilms(activeFilms.slice(0, showedFilms.length + FILMS_PER_STEP));
   };
 
   return (
     <React.Fragment>
-      {/* пока нет сервера promoFilm равен первому фильму из стейта */}
       <FilmPromo promoFilm={promoFilm} />
       <div className="page-content">
         <section className="catalog">
@@ -36,7 +35,7 @@ function MainScreen(): JSX.Element {
           <GenresList films={films} />
           <FilmsList films={showedFilms} />
           {showedFilms.length < activeFilms.length
-          && <ShowMoreBtn onShowMoreBtnClick={onShowMoreBtnClick} />}
+          && <ShowMoreBtn onClickHandler={onClickHandler} />}
         </section>
         <PageFooter />
       </div>

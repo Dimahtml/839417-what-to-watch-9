@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
 
+import { fetchReviewsAction } from '../../../store/api-actions';
+import { store } from '../../../store';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
@@ -11,7 +13,10 @@ import FilmsList from '../../films-list/films-list';
 import { Film } from '../../../types/films';
 import { TabTitle } from '../../../const';
 
+
 function MovieScreen(): JSX.Element {
+  store.dispatch(fetchReviewsAction());
+
   const { id } = useParams<{id: string}>();
   const films = useAppSelector((state) => state.films);
   const film = films[Number(id) - 1];

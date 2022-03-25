@@ -2,11 +2,12 @@ import { Link, useParams } from 'react-router-dom';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import ReviewForm from './review-form/review-form';
-import { FILMS } from '../../../mocks/films';
+import { useAppSelector } from '../../../hooks';
 
 function AddReviewScreen(): JSX.Element {
   const { id } = useParams<{id: string}>();
-  const film = FILMS[Number(id) - 1];
+  const films = useAppSelector((state) => state.films);
+  const film = films[Number(id) - 1];
 
   return (
     <section className="film-card film-card--full">
