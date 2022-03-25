@@ -5,6 +5,7 @@ import { FILMS } from '../mocks/films';
 const initialState = {
   genre: 'All genres',
   films: FILMS,
+  promoFilm: FILMS[0],
 };
 
 const reducer = createReducer(initialState, (builder) => {

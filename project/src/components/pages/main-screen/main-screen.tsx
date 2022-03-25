@@ -13,7 +13,9 @@ import { FILMS_PER_STEP } from '../../../const';
 function MainScreen(): JSX.Element {
   const genre = useAppSelector((state) => state.genre);
   const films = useAppSelector((state) => state.films);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
+
   const [showedFilms, setShowedFilms] = useState<Film[]>(activeFilms.slice(0, FILMS_PER_STEP));
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function MainScreen(): JSX.Element {
   return (
     <React.Fragment>
       {/* пока нет сервера promoFilm равен первому фильму из стейта */}
-      <FilmPromo promoFilm={films[0]} />
+      <FilmPromo promoFilm={promoFilm} />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
