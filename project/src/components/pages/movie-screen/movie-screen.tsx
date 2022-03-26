@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
@@ -14,16 +13,17 @@ import FilmsList from '../../films-list/films-list';
 import { Film } from '../../../types/films';
 import { TabTitle } from '../../../const';
 
-
 function MovieScreen(): JSX.Element {
-  store.dispatch(fetchReviewsAction());
-
   const { id } = useParams<{id: string}>();
   const films = useAppSelector((state) => state.films);
   const film = films[Number(id) - 1];
   const similarFilms = films.filter((item: Film) => item.genre === film.genre && item.id !== film.id);
 
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
+
+  if (id) {
+    store.dispatch(fetchReviewsAction(id));
+  }
 
   const onClickHandler = (tabTitle: TabTitle): void => {
     setActiveTab(tabTitle);
