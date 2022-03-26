@@ -22,7 +22,7 @@ export enum TabTitle {
 export enum APIRoute {
   Films = '/films',
   Promo = '/promo',
-  Comments = '/comments/1',
+  Comments = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
 }

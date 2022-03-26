@@ -46,7 +46,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
-      state.isDataLoaded = true;
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
@@ -54,7 +53,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
-      state.isDataLoaded = true;
     });
 });
 
