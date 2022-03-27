@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks';
 
 import { fetchReviewsAction } from '../../../store/api-actions';
-import { store } from '../../../store';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import FilmControl from './film-control/film-control';
 import Tabs from './tabs/tabs';
 import FilmsList from '../../films-list/films-list';
+
 import { Film } from '../../../types/films';
 import { TabTitle } from '../../../const';
 
 function MovieScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
   const films = useAppSelector((state) => state.films);
   const film = films[Number(id) - 1];
@@ -21,9 +23,11 @@ function MovieScreen(): JSX.Element {
 
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
-  if (id) {
-    store.dispatch(fetchReviewsAction(id));
-  }
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchReviewsAction(id));
+    }
+  }, [dispatch, id]);
 
   const onClickHandler = (tabTitle: TabTitle): void => {
     setActiveTab(tabTitle);

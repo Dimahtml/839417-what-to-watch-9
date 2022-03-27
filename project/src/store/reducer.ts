@@ -3,30 +3,10 @@ import { changeGenre, loadFilms, loadPromoFilm, loadReviews } from './action';
 import { Film, Films } from '../types/films';
 import { Reviews } from '../types/reviews';
 
-const blankFilm = {
-  name: '',
-  posterImage: '',
-  previewImage: '',
-  backgroundImage: '',
-  backgroundColor: '',
-  description: '',
-  rating: 0,
-  scoresCount: 0,
-  director: '',
-  starring: [],
-  runTime: 0,
-  genre: '',
-  released: 0,
-  id: 0,
-  isFavorite: false,
-  videoLink: '',
-  previewVideoLink: '',
-};
-
 type InitalState = {
   genre: string,
   films: Films,
-  promoFilm: Film,
+  promoFilm: Film | null,
   reviews: Reviews,
   isDataLoaded: boolean,
 }
@@ -34,7 +14,7 @@ type InitalState = {
 const initialState: InitalState = {
   genre: 'All genres',
   films: [],
-  promoFilm: blankFilm,
+  promoFilm: null,
   reviews: [],
   isDataLoaded: false,
 };
