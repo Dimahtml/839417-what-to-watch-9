@@ -9,12 +9,12 @@ function ReviewsList({reviews}: ReviewProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.slice(0, reviews.length / 2).map((review) => (
+        {reviews.slice(0, Math.ceil(reviews.length / 2)).map((review) => (
           <FilmReview review={review} key={review.id}/>
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {reviews.slice(reviews.length / 2, reviews.length).map((review) => (
+        {reviews.slice(Math.ceil(reviews.length / 2), reviews.length).map((review) => (
           <FilmReview review={review} key={review.id}/>
         ))}
       </div>

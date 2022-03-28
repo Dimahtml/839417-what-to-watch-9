@@ -19,4 +19,12 @@ export enum TabTitle {
   Reviews = 'Reviews',
 }
 
+export enum APIRoute {
+  Films = '/films',
+  Promo = '/promo',
+  Comments = '/comments/:id',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const FILMS_PER_STEP = 8;

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../../../hooks';
+
 import TabsContent from './tabs-content/tabs-content';
-import { REVIEWS } from '../../../../mocks/reviews';
 import { Film } from '../../../../types/films';
 import { TabTitle } from '../../../../const';
 
@@ -11,6 +12,8 @@ type TabsProps = {
 }
 
 function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
@@ -31,7 +34,7 @@ function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
         </ul>
       </nav>
 
-      <TabsContent activeTab={activeTab} film={film} reviews={REVIEWS} />
+      <TabsContent activeTab={activeTab} film={film} reviews={reviews} />
     </div>
   );
 }
