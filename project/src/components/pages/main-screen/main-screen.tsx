@@ -31,7 +31,7 @@ function MainScreen(): JSX.Element {
     store.dispatch(fetchPromoFilmAction());
   }, []);
 
-  const onClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
     setShowedFilms(activeFilms.slice(0, showedFilms.length + FILMS_PER_STEP));
   };
 
@@ -48,7 +48,7 @@ function MainScreen(): JSX.Element {
           <GenresList films={films} />
           <FilmsList films={showedFilms} />
           {showedFilms.length < activeFilms.length
-          && <ShowMoreBtn onClick={onClickHandler} />}
+          && <ShowMoreBtn onClick={handleClick} />}
         </section>
         <PageFooter />
       </div>
