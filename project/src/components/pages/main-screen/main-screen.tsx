@@ -12,13 +12,14 @@ import ShowMoreBtn from './show-more-btn/show-more-btn';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Film } from '../../../types/films';
 import { FILMS_PER_STEP } from '../../../const';
+import { isCheckedAuth } from '../../../utils';
 
 function MainScreen(): JSX.Element {
   const genre = useAppSelector((state) => state.genre);
   const films = useAppSelector((state) => state.films);
   const promoFilm = useAppSelector((state) => state.promoFilm);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
   const [showedFilms, setShowedFilms] = useState<Film[]>(activeFilms.slice(0, FILMS_PER_STEP));
 
@@ -31,11 +32,11 @@ function MainScreen(): JSX.Element {
     store.dispatch(fetchPromoFilmAction());
   }, []);
 
-  const onClickHandler: MouseEventHandler<HTMLButtonElement> = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
     setShowedFilms(activeFilms.slice(0, showedFilms.length + FILMS_PER_STEP));
   };
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded || isCheckedAuth(authorizationStatus)) {
     return <LoadingScreen />;
   }
 
@@ -48,7 +49,7 @@ function MainScreen(): JSX.Element {
           <GenresList films={films} />
           <FilmsList films={showedFilms} />
           {showedFilms.length < activeFilms.length
-          && <ShowMoreBtn onClick={onClickHandler} />}
+          && <ShowMoreBtn onClick={handleClick} />}
         </section>
         <PageFooter />
       </div>

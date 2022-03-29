@@ -1,20 +1,37 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { logoutAction } from '../../store/api-actions';
 
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
-  const onAvatarClickHandler = () => navigate(AppRoute.MyList);
+  const dispatch = useAppDispatch();
+  const { authorizationStatus } = useAppSelector((state) => state);
+
+  const handleAvatarClick = () => navigate(AppRoute.MyList);
+
+  const handleLogoutClick = () => {
+    dispatch(logoutAction());
+  };
+
+  if (authorizationStatus === AuthorizationStatus.NoAuth) {
+    return (
+      <div className="user-block">
+        <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>
+      </div>
+    );
+  }
 
   return (
     <ul className="user-block">
       <li className="user-block__item">
-        <div className="user-block__avatar" onClick={onAvatarClickHandler}>
+        <div className="user-block__avatar" onClick={handleAvatarClick}>
           <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
         </div>
       </li>
       <li className="user-block__item">
-        <Link to="/" className="user-block__link">Sign out</Link>
+        <Link to="/" className="user-block__link" onClick={handleLogoutClick}>Sign out</Link>
       </li>
     </ul>
   );

@@ -17,7 +17,7 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        {promoFilm && <img src={promoFilm.backgroundImage} alt={promoFilm.name} />}
+        <img src={promoFilm?.backgroundImage} alt={promoFilm?.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
