@@ -1,10 +1,20 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
+  const { authorizationStatus } = useAppSelector((state) => state);
   const onAvatarClickHandler = () => navigate(AppRoute.MyList);
+
+  if (authorizationStatus === AuthorizationStatus.NoAuth) {
+    return (
+      <div className="user-block">
+        <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>
+      </div>
+    );
+  }
 
   return (
     <ul className="user-block">

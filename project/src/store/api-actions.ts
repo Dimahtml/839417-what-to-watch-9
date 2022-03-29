@@ -10,16 +10,13 @@ import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 
-// import { api } from '../store';
-// import { store } from '../store';
-
 export const clearErrorAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'clearError',
-  (_arg, {dispatch, extra: api}) => {
+  (_arg, {dispatch}) => {
     setTimeout(
       () => dispatch(setError('')),
       TIMEOUT_SHOW_ERROR,
@@ -84,8 +81,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      await api.get(APIRoute.Login);
     } catch(error) {
       errorHandle(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -93,10 +90,6 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   },
 );
 
-// Это действие нужно исправить? Наставник аналогичные действия просил привести к виду
-// как в документации(смотри другие действия). Но в этом действии уже есть параметры и я
-// не знаю как передать другие параметры без ошибок. Поэтому в данном случае все остается
-// как в лекции.
 export const loginAction = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch,
   state: State,

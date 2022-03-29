@@ -1,3 +1,5 @@
+import { AuthorizationStatus } from './const';
+
 // Функция для перевода строкового значения даты в формат
 export const getFormattedDate = (initialDate: string): string => {
   const currentDate = new Date(initialDate);
@@ -48,3 +50,6 @@ export const getFilmRating = (mark: string | number): string => {
     return 'Awesome';
   }
 };
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
