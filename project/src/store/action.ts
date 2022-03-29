@@ -12,3 +12,5 @@ export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
 export const loadReviews = createAction<Reviews>('data/loadReviews');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string>('setError');
