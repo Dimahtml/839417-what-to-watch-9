@@ -78,6 +78,7 @@ export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
       dispatch(loadCurrentFilm(data));
     } catch(error) {
       errorHandle(error);
+      dispatch(redirectToRoute(AppRoute.NotFound));
     }
   },
 );

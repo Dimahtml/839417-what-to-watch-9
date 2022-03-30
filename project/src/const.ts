@@ -8,6 +8,7 @@ export enum AppRoute {
   MyList = '/mylist',
   Player = '/player/:id',
   SignIn = '/login',
+  NotFound = '/404',
 }
 
 export enum AuthorizationStatus {
