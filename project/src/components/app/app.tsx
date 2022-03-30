@@ -1,5 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 
 import MainScreen from '../pages/main-screen/main-screen';
@@ -12,8 +11,6 @@ import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +20,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={authorizationStatus} >
+            <PrivateRoute >
               <MyListScreen />
             </PrivateRoute>
           }
