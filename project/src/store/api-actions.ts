@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, Films } from '../types/films';
-import { Reviews } from '../types/reviews';
+import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
 import {
   loadPromoFilm,
@@ -109,6 +109,24 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
     try {
       const {data} = await api.get<Reviews>(APIRoute.Comments.replace(':id', id));
       dispatch(loadReviews(data));
+    }
+    catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const addReviewAction = createAsyncThunk<void, PostingReview, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/addReviews',
+  async ({comment, rating, id}, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.post<Reviews>(APIRoute.Comments.replace(':id', id), {comment, rating});
+      dispatch(loadReviews(data));
+      dispatch(redirectToRoute(AppRoute.Film.replace(':id', id)));
     }
     catch(error) {
       errorHandle(error);
