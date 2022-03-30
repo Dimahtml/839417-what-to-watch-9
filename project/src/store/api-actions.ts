@@ -3,7 +3,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, Films } from '../types/films';
 import { Reviews } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
-import { loadPromoFilm, loadFilms, loadReviews, requireAuthorization, setError } from './action';
+import {
+  loadPromoFilm,
+  loadCurrentFilm,
+  loadFilms,
+  loadSimilarFilms,
+  loadReviews,
+  requireAuthorization,
+  setError
+} from './action';
+
 import { errorHandle } from '../services/error-handle';
 import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { saveToken, dropToken } from '../services/token';
@@ -34,6 +43,38 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
       dispatch(loadFilms(data));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchSimilarFilmsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchFilms',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Films>(APIRoute.SimilarFilms.replace(':id', id));
+      dispatch(loadSimilarFilms(data));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/fetchCurrentFilm',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Film>(APIRoute.CurrentFilm.replace(':id', id));
+      dispatch(loadCurrentFilm(data));
     } catch(error) {
       errorHandle(error);
     }

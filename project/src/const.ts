@@ -24,6 +24,8 @@ export enum TabTitle {
 
 export enum APIRoute {
   Films = '/films',
+  SimilarFilms = '/films/:id/similar',
+  CurrentFilm = '/films/:id',
   Promo = '/promo',
   Comments = '/comments/:id',
   Login = '/login',
