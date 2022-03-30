@@ -10,11 +10,12 @@ import {
   loadSimilarFilms,
   loadReviews,
   requireAuthorization,
-  setError
+  setError,
+  redirectToRoute
 } from './action';
 
 import { errorHandle } from '../services/error-handle';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -142,6 +143,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
       const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(redirectToRoute(AppRoute.Main));
     } catch(error) {
       errorHandle(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

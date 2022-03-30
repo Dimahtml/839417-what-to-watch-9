@@ -30,6 +30,7 @@ export enum APIRoute {
   Comments = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
+  NotFound = '/notfound',
 }
 
 export enum HTTP_CODE {
