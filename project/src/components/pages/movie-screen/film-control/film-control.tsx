@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
-import { AppRoute } from '../../../../const';
+import { AppRoute, AuthorizationStatus } from '../../../../const';
 
 type FilmControlProps = {
   film: Film;
@@ -8,6 +9,7 @@ type FilmControlProps = {
 
 function FilmControl({ film }: FilmControlProps): JSX.Element {
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
   const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
@@ -34,7 +36,11 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
         </svg>
         <span>My list</span>
       </button>
-      <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+      {
+        authorizationStatus === AuthorizationStatus.Auth ?
+          <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
+          : ''
+      }
     </div>
   );
 }

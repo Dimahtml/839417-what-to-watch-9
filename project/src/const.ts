@@ -1,5 +1,9 @@
 export const FILMS_PER_STEP = 8;
 export const TIMEOUT_SHOW_ERROR = 2000;
+export const MIN_MESSAGE_LENGTH = 50;
+export const MAX_MESSAGE_LENGTH = 400;
+export const RATING = 8;
+export const MAX_RATING = 10;
 
 export enum AppRoute {
   AddReview = '/films/:id/review',
@@ -8,6 +12,7 @@ export enum AppRoute {
   MyList = '/mylist',
   Player = '/player/:id',
   SignIn = '/login',
+  NotFound = '/404',
 }
 
 export enum AuthorizationStatus {
@@ -24,10 +29,13 @@ export enum TabTitle {
 
 export enum APIRoute {
   Films = '/films',
+  SimilarFilms = '/films/:id/similar',
+  CurrentFilm = '/films/:id',
   Promo = '/promo',
   Comments = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
+  NotFound = '/notfound',
 }
 
 export enum HTTP_CODE {

@@ -9,4 +9,10 @@ export type Review = {
   date: string;
 };
 
+export type PostingReview = {
+  comment: string;
+  rating: number;
+  id: string;
+}
+
 export type Reviews = Review[];

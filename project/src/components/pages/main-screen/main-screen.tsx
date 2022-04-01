@@ -19,7 +19,8 @@ function MainScreen(): JSX.Element {
   const films = useAppSelector((state) => state.films);
   const promoFilm = useAppSelector((state) => state.promoFilm);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
   const [showedFilms, setShowedFilms] = useState<Film[]>(activeFilms.slice(0, FILMS_PER_STEP));
 

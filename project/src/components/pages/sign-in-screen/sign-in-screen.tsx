@@ -1,9 +1,7 @@
 import { useRef, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks';
 import { loginAction } from '../../../store/api-actions';
 import { AuthData } from '../../../types/auth-data';
-import { AppRoute } from '../../../const';
 
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
@@ -11,13 +9,10 @@ import Logo from '../../logo/logo';
 function SignInScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
-    navigate(AppRoute.Main);
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {

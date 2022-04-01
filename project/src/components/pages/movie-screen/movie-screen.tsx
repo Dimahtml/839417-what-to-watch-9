@@ -1,30 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 
-import { fetchReviewsAction } from '../../../store/api-actions';
+import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchReviewsAction } from '../../../store/api-actions';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import FilmControl from './film-control/film-control';
 import Tabs from './tabs/tabs';
 import FilmsList from '../../films-list/films-list';
-
-import { Film } from '../../../types/films';
 import { TabTitle } from '../../../const';
 
 function MovieScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
-  const films = useAppSelector((state) => state.films);
-  const film = films[Number(id) - 1];
-  const similarFilms = films.filter((item: Film) => item.genre === film.genre && item.id !== film.id);
 
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   useEffect(() => {
     if (id) {
+      dispatch(fetchCurrentFilmAction(id));
+      dispatch(fetchSimilarFilmsAction(id));
       dispatch(fetchReviewsAction(id));
     }
   }, [dispatch, id]);
@@ -33,12 +29,15 @@ function MovieScreen(): JSX.Element {
     setActiveTab(tabTitle);
   };
 
+  const film = useAppSelector((state) => state.currentFilm);
+  const similarFilms = useAppSelector((state) => state.similarFims);
+
   return (
     <React.Fragment>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.backgroundImage} alt={film.name} />
+            <img src={film?.backgroundImage} alt={film?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -50,13 +49,13 @@ function MovieScreen(): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{film.name}</h2>
+              <h2 className="film-card__title">{film?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.released}</span>
+                <span className="film-card__genre">{film?.genre}</span>
+                <span className="film-card__year">{film?.released}</span>
               </p>
 
-              <FilmControl film={film} />
+              {film && <FilmControl film={film} />}
             </div>
           </div>
         </div>
@@ -64,10 +63,10 @@ function MovieScreen(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.posterImage} alt="{film.name} poster" width="218" height="327" />
+              <img src={film?.posterImage} alt="{film.name} poster" width="218" height="327" />
             </div>
 
-            <Tabs activeTab={activeTab} film={film} onClickHandler={onClickHandler} />
+            {film && <Tabs activeTab={activeTab} film={film} onClickHandler={onClickHandler} />}
           </div>
         </div>
       </section>

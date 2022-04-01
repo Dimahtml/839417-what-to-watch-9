@@ -1,6 +1,7 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 import MainScreen from '../pages/main-screen/main-screen';
 import AddReviewScreen from '../pages/add-review-screen/add-review-screen';
@@ -12,10 +13,8 @@ import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
-
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={<MainScreen />} />
         <Route path={AppRoute.AddReview} element={<AddReviewScreen />} />
@@ -23,7 +22,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={authorizationStatus} >
+            <PrivateRoute >
               <MyListScreen />
             </PrivateRoute>
           }
@@ -32,7 +31,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.SignIn} element={<SignInScreen />} />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
