@@ -15,9 +15,9 @@ import { getFilmById } from '../../../store/selectors';
 function MovieScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
-  const films = useAppSelector((state) => state.films);
+  const { films } = useAppSelector(({DATA}) => DATA);
   const film = getFilmById(films, Number(id));
-  const similarFilms = useAppSelector((state) => state.similarFims);
+  const { similarFilms } = useAppSelector(({DATA}) => DATA);
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   useEffect(() => {

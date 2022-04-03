@@ -15,12 +15,12 @@ import { FILMS_PER_STEP } from '../../../const';
 import { isCheckedAuth } from '../../../utils';
 
 function MainScreen(): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const {genre} = useAppSelector(({CINEMA}) => CINEMA);
+  const {films} = useAppSelector(({DATA}) => DATA);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const {promoFilm} = useAppSelector(({DATA}) => DATA);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {isDataLoaded} = useAppSelector(({DATA}) => DATA);
 
   const [showedFilms, setShowedFilms] = useState<Film[]>(activeFilms.slice(0, FILMS_PER_STEP));
 

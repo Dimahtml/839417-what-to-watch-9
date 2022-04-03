@@ -9,7 +9,7 @@ type FilmControlProps = {
 
 function FilmControl({ film }: FilmControlProps): JSX.Element {
   const navigate = useNavigate();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const { authorizationStatus } = useAppSelector(({USER}) => USER);
 
   const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
   const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);

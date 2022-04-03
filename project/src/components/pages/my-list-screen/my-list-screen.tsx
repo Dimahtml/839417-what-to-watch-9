@@ -6,7 +6,7 @@ import Logo from '../../logo/logo';
 import { Film } from '../../../types/films';
 
 function MyListScreen(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({DATA}) => DATA);
 
   return (
     <div className="user-page">

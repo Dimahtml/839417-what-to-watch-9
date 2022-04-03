@@ -3,16 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, Films } from '../types/films';
 import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
-import {
-  loadPromoFilm,
-  loadFilm,
-  loadFilms,
-  loadSimilarFilms,
-  loadReviews,
-  requireAuthorization,
-  setError,
-  redirectToRoute
-} from './action';
+import { setError, redirectToRoute } from './action';
+import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews } from './cinema-data/cinema-data';
+import { requireAuthorization } from './user-process/user-process';
 
 import { errorHandle } from '../services/error-handle';
 import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';

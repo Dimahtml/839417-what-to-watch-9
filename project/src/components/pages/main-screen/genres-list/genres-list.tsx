@@ -8,7 +8,7 @@ type GenresListProps = {
 }
 
 function GenresList({films}: GenresListProps): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
+  const { genre } = useAppSelector(({ CINEMA }) => CINEMA);
   const dispatch = useAppDispatch();
 
   const genres: Array<string> = films.map((film) => film.genre);

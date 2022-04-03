@@ -5,8 +5,8 @@ import ReviewForm from './review-form/review-form';
 import { useAppSelector } from '../../../hooks';
 
 function AddReviewScreen(): JSX.Element {
-  const { id } = useParams<{id: string}>();
-  const films = useAppSelector((state) => state.films);
+  const {id} = useParams<{id: string}>();
+  const {films} = useAppSelector(({DATA}) => DATA);
   const film = films[Number(id) - 1];
 
   return (

@@ -12,7 +12,7 @@ type TabsProps = {
 }
 
 function Tabs({activeTab, film, onClickHandler}: TabsProps): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
+  const { reviews } = useAppSelector(({ DATA }) => DATA);
 
   return (
     <div className="film-card__desc">
