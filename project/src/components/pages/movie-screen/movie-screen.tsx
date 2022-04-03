@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 
-import { fetchCurrentFilmAction, fetchSimilarFilmsAction, fetchReviewsAction } from '../../../store/api-actions';
+import { fetchFilmAction, fetchSimilarFilmsAction, fetchReviewsAction } from '../../../store/api-actions';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
@@ -14,12 +14,19 @@ import { TabTitle } from '../../../const';
 function MovieScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
-
+  const films = useAppSelector((state) => state.films);
+  const film = films.find((item) => item.id === Number(id));
+  const similarFilms = useAppSelector((state) => state.similarFims);
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   useEffect(() => {
+    if (id && !film) {
+      dispatch(fetchFilmAction(id));
+    }
+  }, [dispatch, id, film]);
+
+  useEffect(() => {
     if (id) {
-      dispatch(fetchCurrentFilmAction(id));
       dispatch(fetchSimilarFilmsAction(id));
       dispatch(fetchReviewsAction(id));
     }
@@ -28,9 +35,6 @@ function MovieScreen(): JSX.Element {
   const onClickHandler = (tabTitle: TabTitle): void => {
     setActiveTab(tabTitle);
   };
-
-  const film = useAppSelector((state) => state.currentFilm);
-  const similarFilms = useAppSelector((state) => state.similarFims);
 
   return (
     <React.Fragment>

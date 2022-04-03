@@ -26,7 +26,7 @@ function MainScreen(): JSX.Element {
 
   useEffect(() => {
     setShowedFilms(activeFilms.slice(0, FILMS_PER_STEP));
-  }, [films, activeFilms, genre]);
+  }, [activeFilms, genre]);
 
   useEffect(() => {
     store.dispatch(fetchFilmsAction());

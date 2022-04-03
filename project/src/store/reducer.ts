@@ -4,7 +4,7 @@ import {
   changeGenre,
   loadFilms,
   loadSimilarFilms,
-  loadCurrentFilm,
+  loadFilm,
   loadPromoFilm,
   loadReviews,
   requireAuthorization,
@@ -19,7 +19,6 @@ type InitalState = {
   genre: string,
   films: Films,
   similarFims: Films,
-  currentFilm: Film | null,
   promoFilm: Film | null,
   reviews: Reviews,
   isDataLoaded: boolean,
@@ -31,7 +30,6 @@ const initialState: InitalState = {
   genre: 'All genres',
   films: [],
   similarFims: [],
-  currentFilm: null,
   promoFilm: null,
   reviews: [],
   isDataLoaded: false,
@@ -44,8 +42,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
     })
-    .addCase(loadCurrentFilm, (state, action) => {
-      state.currentFilm = action.payload;
+    .addCase(loadFilm, (state, action) => {
+      state.films.push(action.payload);
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;

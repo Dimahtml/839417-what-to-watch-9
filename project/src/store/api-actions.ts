@@ -5,7 +5,7 @@ import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
 import {
   loadPromoFilm,
-  loadCurrentFilm,
+  loadFilm,
   loadFilms,
   loadSimilarFilms,
   loadReviews,
@@ -66,16 +66,16 @@ export const fetchSimilarFilmsAction = createAsyncThunk<void, string, {
   },
 );
 
-export const fetchCurrentFilmAction = createAsyncThunk<void, string, {
+export const fetchFilmAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
-  'data/fetchCurrentFilm',
+  'data/fetchFilm',
   async (id, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film>(APIRoute.CurrentFilm.replace(':id', id));
-      dispatch(loadCurrentFilm(data));
+      const {data} = await api.get<Film>(APIRoute.Film.replace(':id', id));
+      dispatch(loadFilm(data));
     } catch(error) {
       errorHandle(error);
       dispatch(redirectToRoute(AppRoute.NotFound));

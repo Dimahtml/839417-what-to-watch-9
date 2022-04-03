@@ -9,7 +9,7 @@ export const loadFilms = createAction<Films>('data/loadFilms');
 
 export const loadSimilarFilms = createAction<Films>('data/loadSimilarFilms');
 
-export const loadCurrentFilm = createAction<Film>('data/loadCurrentFilm');
+export const loadFilm = createAction<Film>('data/loadFilm');
 
 export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
 
