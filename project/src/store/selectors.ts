@@ -5,7 +5,6 @@ import { Film } from '../types/films';
 // функция для получения списка фильмов, подходящих по жанру
 export const getFilmsByActiveGenre = (state: CombinedState<{ DATA: CinemaData; CINEMA: CinemaProcess; USER: UserProcess; }>) => {
   if (state.CINEMA.genre === 'All genres') {
-    // return state.films;
     return state.DATA.films;
   }
   return state.DATA.films.filter((film) => film.genre === state.CINEMA.genre);
