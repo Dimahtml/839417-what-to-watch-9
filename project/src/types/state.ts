@@ -13,9 +13,6 @@ export type CinemaData = {
   promoFilm: Film | null,
   reviews: Reviews,
   isDataLoaded: boolean,
-};
-
-export type CinemaProcess = {
   genre: string,
   error: string,
 };

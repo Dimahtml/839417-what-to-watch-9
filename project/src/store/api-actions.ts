@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, Films } from '../types/films';
 import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
-import { setError, redirectToRoute } from './action';
+import { redirectToRoute } from './action';
+import { setError } from '../store/cinema-data/cinema-data';
 import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews } from './cinema-data/cinema-data';
 import { requireAuthorization } from './user-process/user-process';
 

@@ -45,7 +45,6 @@ export enum HTTP_CODE {
 }
 
 export enum NameSpace {
-  cinema = 'CINEMA',
   data = 'DATA',
   user = 'USER',
 }

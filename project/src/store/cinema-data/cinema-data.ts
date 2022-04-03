@@ -8,6 +8,8 @@ const initialState: CinemaData = {
   promoFilm: null,
   reviews: [],
   isDataLoaded:false,
+  genre: 'All genres',
+  error: '',
 };
 
 export const cinemaData = createSlice({
@@ -31,7 +33,13 @@ export const cinemaData = createSlice({
     loadReviews: (state, action) => {
       state.reviews = action.payload;
     },
+    changeGenre: (state, action) => {
+      state.genre = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loadFilm, loadPromoFilm, loadFilms, loadSimilarFilms, loadReviews } = cinemaData.actions;
+export const { loadFilm, loadPromoFilm, loadFilms, loadSimilarFilms, loadReviews, changeGenre, setError } = cinemaData.actions;

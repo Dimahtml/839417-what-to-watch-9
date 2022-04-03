@@ -3,10 +3,12 @@ import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import ReviewForm from './review-form/review-form';
 import { useAppSelector } from '../../../hooks';
+import { getFilms } from '../../../store/selectors';
+
 
 function AddReviewScreen(): JSX.Element {
   const {id} = useParams<{id: string}>();
-  const {films} = useAppSelector(({DATA}) => DATA);
+  const films = useAppSelector(getFilms);
   const film = films[Number(id) - 1];
 
   return (
