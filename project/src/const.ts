@@ -30,7 +30,7 @@ export enum TabTitle {
 export enum APIRoute {
   Films = '/films',
   SimilarFilms = '/films/:id/similar',
-  CurrentFilm = '/films/:id',
+  Film = '/films/:id',
   Promo = '/promo',
   Comments = '/comments/:id',
   Login = '/login',
@@ -42,4 +42,9 @@ export enum HTTP_CODE {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
+}
+
+export enum NameSpace {
+  data = 'DATA',
+  user = 'USER',
 }

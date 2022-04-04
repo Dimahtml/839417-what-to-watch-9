@@ -7,7 +7,7 @@ import { logoutAction } from '../../store/api-actions';
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
 
   const handleAvatarClick = () => navigate(AppRoute.MyList);
 

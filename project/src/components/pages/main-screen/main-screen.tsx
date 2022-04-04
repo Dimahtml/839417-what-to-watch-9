@@ -1,6 +1,13 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { useAppSelector } from '../../../hooks';
-import { getFilmsByActiveGenre } from '../../../store/selectors';
+import {
+  getAuthorizationStatus,
+  getFilmsByActiveGenre,
+  getActiveGenre,
+  getFilms,
+  getPromoFilm,
+  getIsDataLoaded
+} from '../../../store/selectors';
 import { fetchFilmsAction, fetchPromoFilmAction } from '../../../store/api-actions';
 import { store } from '../../../store';
 
@@ -15,18 +22,18 @@ import { FILMS_PER_STEP } from '../../../const';
 import { isCheckedAuth } from '../../../utils';
 
 function MainScreen(): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const genre = useAppSelector(getActiveGenre);
+  const films = useAppSelector(getFilms);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isDataLoaded = useAppSelector(getIsDataLoaded);
 
   const [showedFilms, setShowedFilms] = useState<Film[]>(activeFilms.slice(0, FILMS_PER_STEP));
 
   useEffect(() => {
     setShowedFilms(activeFilms.slice(0, FILMS_PER_STEP));
-  }, [films, activeFilms, genre]);
+  }, [activeFilms, genre]);
 
   useEffect(() => {
     store.dispatch(fetchFilmsAction());
