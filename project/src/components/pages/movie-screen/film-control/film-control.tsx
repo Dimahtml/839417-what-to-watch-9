@@ -1,6 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
+import { getAuthorizationStatus } from '../../../../store/selectors';
 import { AppRoute, AuthorizationStatus } from '../../../../const';
 
 type FilmControlProps = {
@@ -9,9 +10,15 @@ type FilmControlProps = {
 
 function FilmControl({ film }: FilmControlProps): JSX.Element {
   const navigate = useNavigate();
-  const { authorizationStatus } = useAppSelector(({USER}) => USER);
+  const { id } = useParams<{id: string}>();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
+  const onPlayerBtnClickHandler = () => {
+    if (id) {
+      navigate(AppRoute.Player.replace(':id', id));
+    }
+  };
+
   const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
 
   return (

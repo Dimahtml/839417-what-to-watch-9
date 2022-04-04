@@ -14,7 +14,7 @@ import FilmsList from '../../films-list/films-list';
 import FilmPromo from './film-promo/film-promo';
 import PageFooter from '../../page-footer/page-footer';
 import GenresList from './genres-list/genres-list';
-import ShowMoreBtn from './show-more-btn/show-more-btn';
+import ShowMoreButton from './show-more-button/show-more-button';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { Film } from '../../../types/films';
 import { FILMS_PER_STEP } from '../../../const';
@@ -55,7 +55,7 @@ function MainScreen(): JSX.Element {
           <GenresList />
           <FilmsList films={showedFilms} />
           {showedFilms.length < activeFilms.length
-          && <ShowMoreBtn onClick={handleClick} />}
+          && <ShowMoreButton onClick={handleClick} />}
         </section>
         <PageFooter />
       </div>

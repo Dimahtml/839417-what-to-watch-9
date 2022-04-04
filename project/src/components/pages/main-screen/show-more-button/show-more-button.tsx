@@ -2,7 +2,7 @@ type ShowMoreBtnProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function ShowMoreBtn({onClick}: ShowMoreBtnProps): JSX.Element {
+function ShowMoreButton({onClick}: ShowMoreBtnProps): JSX.Element {
   return (
     <div className="catalog__more">
       <button
@@ -16,4 +16,4 @@ function ShowMoreBtn({onClick}: ShowMoreBtnProps): JSX.Element {
   );
 }
 
-export default ShowMoreBtn;
+export default ShowMoreButton;

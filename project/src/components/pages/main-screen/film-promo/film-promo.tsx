@@ -10,8 +10,14 @@ type FilmPromoProps = {
 
 function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
   const navigate = useNavigate();
+  const id  = promoFilm?.id.toString();
 
-  const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
+  const onPlayerBtnClickHandler = () => {
+    if (id) {
+      navigate(AppRoute.Player.replace(':id', id));
+    }
+  };
+
   const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
 
   return (

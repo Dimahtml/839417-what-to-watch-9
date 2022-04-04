@@ -53,3 +53,18 @@ export const getFilmRating = (mark: string | number): string => {
 
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
+
+// функция для получения оставшегося времени
+export const getRemainingTime = (percents: number, durationInSec: any) => {
+  let result = '';
+  durationInSec = Math.floor(durationInSec * (100 - percents) / 100);
+  if (durationInSec < 10) {
+    durationInSec = `0${durationInSec}`;
+  }
+  let durationInMin: number | string = Math.floor(durationInSec / 60);
+  if (durationInMin < 10) {
+    durationInMin = `0${durationInMin}`;
+  }
+  result = `-${durationInMin}:${durationInSec}`;
+  return result;
+};
