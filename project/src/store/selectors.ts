@@ -4,17 +4,22 @@ import { State } from '../types/state';
 
 // функция для получения списка фильмов, подходящих по жанру
 export const getFilmsByActiveGenre = (state: State) => {
-  if (state.DATA.genre === 'All genres') {
-    return state.DATA.films;
+  const genre = getActiveGenre(state);
+  const films = getFilms(state);
+
+  if (genre === 'All genres') {
+    return films;
   }
-  return state.DATA.films.filter((film) => film.genre === state.DATA.genre);
+
+  return films.filter((film) => film.genre === state.DATA.genre);
 };
 
 // функция для получения фильма из списка фильмов по его id
-export const getFilmById = (arr: Film[], id: number): Film | undefined => {
-  const callback = (film: Film): boolean => film.id === Number(id);
-  return arr.find(callback);
-};
+export const getFilmById = (id: number) => (state: State) =>
+  state[NameSpace.data].films.find((film: Film) => film.id === id);
+
+export const getFilmsGenres = (state: State) =>
+  ['All genres', ...new Set(state[NameSpace.data].films.map((film) => film.genre))];
 
 export const getActiveGenre = ((state: State) => state[NameSpace.data].genre);
 
@@ -27,4 +32,3 @@ export const getPromoFilm = ((state: State) => state[NameSpace.data].promoFilm);
 export const getAuthorizationStatus = ((state: State) => state[NameSpace.user].authorizationStatus);
 
 export const getIsDataLoaded = ((state: State) => state[NameSpace.data].isDataLoaded);
-

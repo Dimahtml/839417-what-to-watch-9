@@ -4,7 +4,6 @@ import {
   getAuthorizationStatus,
   getFilmsByActiveGenre,
   getActiveGenre,
-  getFilms,
   getPromoFilm,
   getIsDataLoaded
 } from '../../../store/selectors';
@@ -23,7 +22,6 @@ import { isCheckedAuth } from '../../../utils';
 
 function MainScreen(): JSX.Element {
   const genre = useAppSelector(getActiveGenre);
-  const films = useAppSelector(getFilms);
   const activeFilms = useAppSelector(getFilmsByActiveGenre);
   const promoFilm = useAppSelector(getPromoFilm);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -54,7 +52,7 @@ function MainScreen(): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList films={films} />
+          <GenresList />
           <FilmsList films={showedFilms} />
           {showedFilms.length < activeFilms.length
           && <ShowMoreBtn onClick={handleClick} />}
