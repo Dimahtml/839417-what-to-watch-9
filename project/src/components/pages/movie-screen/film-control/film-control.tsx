@@ -24,7 +24,6 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
   };
 
   const onMyListPlusButtonClick = () => {
-    navigate(AppRoute.MyList);
     if (film) {
       store.dispatch(addFilmToFavoriteAction(film));
       film.isFavorite = true;

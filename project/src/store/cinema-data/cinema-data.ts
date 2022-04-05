@@ -43,13 +43,19 @@ export const cinemaData = createSlice({
     loadFavoriteFilms: (state, action) => {
       state.favoriteFilms = [...action.payload];
     },
-    addFilmToMyList: (state, action) => {
-      // eslint-disable-next-line no-console
-      console.log(action.payload);
-    },
-    removeFilmFromFavorite: (state, action) => {
-      // eslint-disable-next-line no-console
-      console.log(1234143124);
+    updateFilm: (state, action) => {
+      state.favoriteFilms = [];
+
+      state.films = state.films.map((film) => {
+        if (film.id === action.payload.id) {
+          return action.payload;
+        }
+        return film;
+      });
+
+      if (state.promoFilm?.id === action.payload.id) {
+        state.promoFilm = action.payload;
+      }
     },
   },
 });
@@ -60,9 +66,8 @@ export const {
   loadFilms,
   loadSimilarFilms,
   loadFavoriteFilms,
-  removeFilmFromFavorite,
+  updateFilm,
   loadReviews,
   changeGenre,
   setError,
-  addFilmToMyList,
 } = cinemaData.actions;

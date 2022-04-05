@@ -24,7 +24,6 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
   };
 
   const onMyListPlusButtonClick = () => {
-    navigate(AppRoute.MyList);
     if (promoFilm) {
       store.dispatch(addFilmToFavoriteAction(promoFilm));
     }
