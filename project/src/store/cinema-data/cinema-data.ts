@@ -47,6 +47,10 @@ export const cinemaData = createSlice({
       // eslint-disable-next-line no-console
       console.log(action.payload);
     },
+    removeFilmFromFavorite: (state, action) => {
+      // eslint-disable-next-line no-console
+      console.log(1234143124);
+    },
   },
 });
 
@@ -56,6 +60,7 @@ export const {
   loadFilms,
   loadSimilarFilms,
   loadFavoriteFilms,
+  removeFilmFromFavorite,
   loadReviews,
   changeGenre,
   setError,

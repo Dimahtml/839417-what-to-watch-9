@@ -1,8 +1,8 @@
-type ShowMoreBtnProps = {
+type ShowMoreButtonProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-function ShowMoreButton({onClick}: ShowMoreBtnProps): JSX.Element {
+function ShowMoreButton({onClick}: ShowMoreButtonProps): JSX.Element {
   return (
     <div className="catalog__more">
       <button

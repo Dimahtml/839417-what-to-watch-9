@@ -3,8 +3,10 @@ import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
 import { getAuthorizationStatus } from '../../../../store/selectors';
 import { AppRoute, AuthorizationStatus } from '../../../../const';
-import { addFilmToFavoriteAction } from '../../../../store/api-actions';
+import { addFilmToFavoriteAction, removeFilmFromFavoriteAction } from '../../../../store/api-actions';
 import { store } from '../../../../store';
+import MyListPlusButton from '../../../my-list-plus-button/my-list-plus-button';
+import MyListCheckButton from '../../../my-list-check-button/my-list-check-button';
 
 type FilmControlProps = {
   film: Film;
@@ -21,9 +23,19 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
     }
   };
 
-  const onMyListBtnClickHandler = () => {
+  const onMyListPlusButtonClick = () => {
     navigate(AppRoute.MyList);
-    store.dispatch(addFilmToFavoriteAction(film));
+    if (film) {
+      store.dispatch(addFilmToFavoriteAction(film));
+      film.isFavorite = true;
+    }
+  };
+
+  const onMyListCheckButtonClick = () => {
+    if (film) {
+      store.dispatch(removeFilmFromFavoriteAction(film));
+      film.isFavorite = false;
+    }
   };
 
   return (
@@ -38,16 +50,11 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
         </svg>
         <span>Play</span>
       </button>
-      <button
-        className="btn btn--list film-card__button"
-        type="button"
-        onClick={onMyListBtnClickHandler}
-      >
-        <svg viewBox="0 0 19 20" width="19" height="20">
-          <use xlinkHref="#add"></use>
-        </svg>
-        <span>My list</span>
-      </button>
+      {
+        film?.isFavorite === true ?
+          <MyListCheckButton onClick={onMyListCheckButtonClick} /> :
+          <MyListPlusButton onClick={onMyListPlusButtonClick} />
+      }
       {
         authorizationStatus === AuthorizationStatus.Auth ?
           <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>
