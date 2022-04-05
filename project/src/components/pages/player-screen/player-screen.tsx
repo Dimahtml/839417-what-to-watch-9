@@ -84,7 +84,7 @@ function PlayerScreen(): JSX.Element {
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value={percent} max="100"></progress>
-            <div className="player__toggler" style={{ left: `${percent}` }}>Toggler</div>
+            <div className="player__toggler" style={{ left: `${percent}%` }}>Toggler</div>
           </div>
           <div className="player__time-value">
             {isLoading ? 'loading...' : getRemainingTime(percent, video!.duration)}

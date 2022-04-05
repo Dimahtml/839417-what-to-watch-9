@@ -5,6 +5,7 @@ import { CinemaData } from '../../types/state';
 const initialState: CinemaData = {
   films: [],
   similarFilms: [],
+  favoriteFilms: [],
   promoFilm: null,
   reviews: [],
   isDataLoaded:false,
@@ -39,7 +40,24 @@ export const cinemaData = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    loadFavoriteFilms: (state, action) => {
+      state.favoriteFilms = [...action.payload];
+    },
+    addFilmToMyList: (state, action) => {
+      // eslint-disable-next-line no-console
+      console.log(action.payload);
+    },
   },
 });
 
-export const { loadFilm, loadPromoFilm, loadFilms, loadSimilarFilms, loadReviews, changeGenre, setError } = cinemaData.actions;
+export const {
+  loadFilm,
+  loadPromoFilm,
+  loadFilms,
+  loadSimilarFilms,
+  loadFavoriteFilms,
+  loadReviews,
+  changeGenre,
+  setError,
+  addFilmToMyList,
+} = cinemaData.actions;

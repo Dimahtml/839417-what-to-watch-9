@@ -3,6 +3,8 @@ import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
 import { getAuthorizationStatus } from '../../../../store/selectors';
 import { AppRoute, AuthorizationStatus } from '../../../../const';
+import { addFilmToFavoriteAction } from '../../../../store/api-actions';
+import { store } from '../../../../store';
 
 type FilmControlProps = {
   film: Film;
@@ -19,7 +21,10 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
     }
   };
 
-  const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
+  const onMyListBtnClickHandler = () => {
+    navigate(AppRoute.MyList);
+    store.dispatch(addFilmToFavoriteAction(film));
+  };
 
   return (
     <div className="film-card__buttons">

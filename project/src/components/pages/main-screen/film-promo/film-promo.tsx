@@ -3,6 +3,8 @@ import { Film } from '../../../../types/films';
 import { AppRoute } from '../../../../const';
 import UserBlock from '../../../user-block/user-block';
 import Logo from '../../../logo/logo';
+import { addFilmToFavoriteAction } from '../../../../store/api-actions';
+import { store } from '../../../../store';
 
 type FilmPromoProps = {
   promoFilm: Film | null;
@@ -18,7 +20,12 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
     }
   };
 
-  const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
+  const onMyListBtnClickHandler = () => {
+    navigate(AppRoute.MyList);
+    if (promoFilm) {
+      store.dispatch(addFilmToFavoriteAction(promoFilm));
+    }
+  };
 
   return (
     <section className="film-card">

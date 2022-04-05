@@ -27,12 +27,15 @@ export enum TabTitle {
   Reviews = 'Reviews',
 }
 
+// в AddToMyList Статус фильма может быть 1 или 0, где 1 добавляет фильма в список «к просмотру», а 0 удаляет
 export enum APIRoute {
   Films = '/films',
   SimilarFilms = '/films/:id/similar',
   Film = '/films/:id',
   Promo = '/promo',
   Comments = '/comments/:id',
+  FavoriteFilms = '/favorite',
+  AddToFavorite = '/favorite/:filmId/:status',
   Login = '/login',
   Logout = '/logout',
   NotFound = '/notfound',
