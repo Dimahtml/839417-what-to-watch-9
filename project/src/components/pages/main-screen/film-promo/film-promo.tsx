@@ -1,7 +1,8 @@
-// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
-import { AppRoute } from '../../../../const';
+import { AppRoute, AuthorizationStatus } from '../../../../const';
+import { getAuthorizationStatus } from '../../../../store/selectors';
 import { addFilmToFavoriteAction, removeFilmFromFavoriteAction } from '../../../../store/api-actions';
 import { store } from '../../../../store';
 import UserBlock from '../../../user-block/user-block';
@@ -16,20 +17,24 @@ type FilmPromoProps = {
 function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
   const navigate = useNavigate();
   const id  = promoFilm?.id.toString();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const onPlayerButtonClick = () => {
+  const handlePlayerButtonClick = () => {
     if (id) {
       navigate(AppRoute.Player.replace(':id', id));
     }
   };
 
-  const onMyListPlusButtonClick = () => {
+  const handleMyListPlusButtonClick = () => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.SignIn);
+    }
     if (promoFilm) {
       store.dispatch(addFilmToFavoriteAction(promoFilm));
     }
   };
 
-  const onMyListCheckButtonClick = () => {
+  const handleMyListCheckButtonClick = () => {
     if (promoFilm) {
       store.dispatch(removeFilmFromFavoriteAction(promoFilm));
     }
@@ -65,7 +70,7 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
               <button
                 className="btn btn--play film-card__button"
                 type="button"
-                onClick={onPlayerButtonClick}
+                onClick={handlePlayerButtonClick}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
@@ -74,8 +79,8 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
               </button>
               {
                 promoFilm?.isFavorite === true ?
-                  <MyListCheckButton onClick={onMyListCheckButtonClick} /> :
-                  <MyListPlusButton onClick={onMyListPlusButtonClick} />
+                  <MyListCheckButton onClick={handleMyListCheckButtonClick} /> :
+                  <MyListPlusButton onClick={handleMyListPlusButtonClick} />
               }
             </div>
           </div>

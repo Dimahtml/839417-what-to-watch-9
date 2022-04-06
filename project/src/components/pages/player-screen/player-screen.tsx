@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
 import { getFilmById } from '../../../store/selectors';
@@ -19,13 +19,15 @@ function PlayerScreen(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   let video = videoRef.current;
 
-  if (!film && id) {
-    store.dispatch(fetchFilmAction(id));
-  }
+  useEffect (() => {
+    if (!film && id) {
+      store.dispatch(fetchFilmAction(id));
+    }
+  }, [film, id]);
 
-  const onExitBtnClickHandler = () => navigate(-1);
+  const handleExitButtonClick = () => navigate(-1);
 
-  const onPlayButtonClick = () => {
+  const handlePlayButtonClick = () => {
     if (isActive) {
       videoRef.current?.pause();
       setActive(false);
@@ -75,7 +77,7 @@ function PlayerScreen(): JSX.Element {
       <button
         type="button"
         className="player__exit"
-        onClick={onExitBtnClickHandler}
+        onClick={handleExitButtonClick}
       >
         Exit
       </button>
@@ -87,7 +89,7 @@ function PlayerScreen(): JSX.Element {
             <div className="player__toggler" style={{ left: `${percent}%` }}>Toggler</div>
           </div>
           <div className="player__time-value">
-            {isLoading ? 'loading...' : getRemainingTime(percent, video!.duration)}
+            {isLoading || !video ? 'loading...' : getRemainingTime(percent, video.duration)}
           </div>
         </div>
 
@@ -95,7 +97,7 @@ function PlayerScreen(): JSX.Element {
           <button
             type="button"
             className="player__play"
-            onClick={onPlayButtonClick}
+            onClick={handlePlayButtonClick}
           >
             {isActive? <PauseButton /> : <PlayButton />}
           </button>

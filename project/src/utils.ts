@@ -55,13 +55,13 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
   authorizationStatus === AuthorizationStatus.Unknown;
 
 // функция для получения оставшегося времени
-export const getRemainingTime = (percents: number, durationInSec: any) => {
+export const getRemainingTime = (percents: number, durationInSec: number | string) => {
   let result = '';
-  durationInSec = Math.floor(durationInSec * (100 - percents) / 100);
+  durationInSec = Math.floor(Number(durationInSec) * (100 - percents) / 100);
   if (durationInSec < 10) {
     durationInSec = `0${durationInSec}`;
   }
-  let durationInMin: number | string = Math.floor(durationInSec / 60);
+  let durationInMin: number | string = Math.floor(Number(durationInSec) / 60);
   if (durationInMin < 10) {
     durationInMin = `0${durationInMin}`;
   }

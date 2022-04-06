@@ -17,23 +17,24 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
   const { id } = useParams<{id: string}>();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const onPlayerBtnClickHandler = () => {
+  const handlePlayerButtonClick = () => {
     if (id) {
       navigate(AppRoute.Player.replace(':id', id));
     }
   };
 
-  const onMyListPlusButtonClick = () => {
-    if (film) {
+  const handleMyListPlusButtonClick = () => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.SignIn);
+    }
+    if (film && authorizationStatus === AuthorizationStatus.Auth) {
       store.dispatch(addFilmToFavoriteAction(film));
-      film.isFavorite = true;
     }
   };
 
-  const onMyListCheckButtonClick = () => {
+  const handleMyListCheckButtonClick = () => {
     if (film) {
       store.dispatch(removeFilmFromFavoriteAction(film));
-      film.isFavorite = false;
     }
   };
 
@@ -42,7 +43,7 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
       <button
         className="btn btn--play film-card__button"
         type="button"
-        onClick={onPlayerBtnClickHandler}
+        onClick={handlePlayerButtonClick}
       >
         <svg viewBox="0 0 19 19" width="19" height="19">
           <use xlinkHref="#play-s"></use>
@@ -50,9 +51,9 @@ function FilmControl({ film }: FilmControlProps): JSX.Element {
         <span>Play</span>
       </button>
       {
-        film?.isFavorite === true ?
-          <MyListCheckButton onClick={onMyListCheckButtonClick} /> :
-          <MyListPlusButton onClick={onMyListPlusButtonClick} />
+        film?.isFavorite ?
+          <MyListCheckButton onClick={handleMyListCheckButtonClick} /> :
+          <MyListPlusButton onClick={handleMyListPlusButtonClick} />
       }
       {
         authorizationStatus === AuthorizationStatus.Auth ?
