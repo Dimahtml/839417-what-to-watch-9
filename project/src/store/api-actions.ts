@@ -28,6 +28,20 @@ export const clearErrorAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const setErrorAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'setError',
+  (message, {dispatch}) => {
+    setTimeout(
+      () => dispatch(setError(message)),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
+
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
   state: State,

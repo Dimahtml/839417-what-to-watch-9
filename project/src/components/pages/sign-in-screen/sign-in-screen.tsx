@@ -1,8 +1,12 @@
-import { useRef, FormEvent } from 'react';
-import { useAppDispatch } from '../../../hooks';
-import { loginAction } from '../../../store/api-actions';
-import { AuthData } from '../../../types/auth-data';
+import { useRef, useEffect, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { setErrorAction, clearErrorAction, loginAction } from '../../../store/api-actions';
+import { AuthData } from '../../../types/auth-data';
+import { AppRoute, AuthorizationStatus } from '../../../const';
+import { getAuthorizationStatus } from '../../../store/selectors';
+import { validatePassword } from '../../../utils';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 
@@ -10,6 +14,8 @@ function SignInScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -18,14 +24,24 @@ function SignInScreen(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (passwordRef.current !== null && !validatePassword(passwordRef.current.value)) {
+      dispatch(setErrorAction('Password must contain at least one letter and one number'));
+    }
+
+    if (loginRef.current !== null && passwordRef.current !== null && validatePassword(passwordRef.current.value)) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
+      dispatch(clearErrorAction);
     }
-
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  });
 
   return (
     <div className="user-page">
@@ -42,7 +58,8 @@ function SignInScreen(): JSX.Element {
               <input
                 ref={loginRef}
                 className="sign-in__input"
-                type="email" placeholder="Email address"
+                type="email"
+                placeholder="Email address"
                 name="user-email"
                 id="user-email"
               />

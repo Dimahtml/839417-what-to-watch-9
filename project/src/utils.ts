@@ -68,3 +68,15 @@ export const getRemainingTime = (percents: number, durationInSec: number | strin
   result = `-${durationInMin}:${durationInSec}`;
   return result;
 };
+
+// функция для проверки пароля (должен содержать хотя бы 1 букву и 1 цифру)
+export const validatePassword = (text: string) => {
+  const reg1 = /[A-Za-zА-Яа-я]/;
+  const reg2 = /[0-9]/;
+
+  if (!text.match(reg1) || !text.match(reg2)) {
+    return false;
+  }
+
+  return true;
+};

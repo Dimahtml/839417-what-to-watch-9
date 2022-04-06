@@ -29,6 +29,8 @@ export const getFilms = ((state: State) => state[NameSpace.data].films);
 
 export const getFavoriteFilms = ((state: State) => state[NameSpace.data].favoriteFilms);
 
+export const getSimilarFilms = ((state: State) => state[NameSpace.data].similarFilms);
+
 export const getPromoFilm = ((state: State) => state[NameSpace.data].promoFilm);
 
 export const getAuthorizationStatus = ((state: State) => state[NameSpace.user].authorizationStatus);

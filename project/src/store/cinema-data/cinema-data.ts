@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, MAX_SIMILAR_FILMS_COUNT } from '../../const';
 import { CinemaData } from '../../types/state';
 
 const initialState: CinemaData = {
@@ -28,7 +28,7 @@ export const cinemaData = createSlice({
       state.isDataLoaded = true;
     },
     loadSimilarFilms: (state, action) => {
-      state.similarFilms = action.payload;
+      state.similarFilms = action.payload.slice(0, MAX_SIMILAR_FILMS_COUNT);
       state.isDataLoaded = true;
     },
     loadReviews: (state, action) => {

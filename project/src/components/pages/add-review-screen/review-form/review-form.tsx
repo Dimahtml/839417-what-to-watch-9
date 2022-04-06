@@ -6,7 +6,6 @@ import { addReviewAction } from '../../../../store/api-actions';
 import { MAX_RATING, RATING, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH } from '../../../../const';
 import RatingInputs from './rating-inputs/rating-inputs';
 
-
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(RATING);
   const [message, setMessage] = useState('');

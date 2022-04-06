@@ -1,13 +1,23 @@
+import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+
+import { fetchFilmAction } from '../../../store/api-actions';
 import Logo from '../../logo/logo';
 import UserBlock from '../../user-block/user-block';
 import ReviewForm from './review-form/review-form';
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getFilmById } from '../../../store/selectors';
 
 function AddReviewScreen(): JSX.Element {
+  const dispatch = useAppDispatch();
   const {id} = useParams<{id: string}>();
   const film = useAppSelector(getFilmById(Number(id)));
+
+  useEffect(() => {
+    if (id && !film) {
+      dispatch(fetchFilmAction(id));
+    }
+  }, [dispatch, id, film]);
 
   return (
     <section className="film-card film-card--full">

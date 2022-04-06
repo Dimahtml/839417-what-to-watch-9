@@ -17,7 +17,14 @@ function App(): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={<MainScreen />} />
-        <Route path={AppRoute.AddReview} element={<AddReviewScreen />} />
+        <Route
+          path={AppRoute.AddReview}
+          element={
+            <PrivateRoute >
+              <AddReviewScreen />
+            </PrivateRoute>
+          }
+        />
         <Route path={AppRoute.Film} element={<MovieScreen />} />
         <Route
           path={AppRoute.MyList}
