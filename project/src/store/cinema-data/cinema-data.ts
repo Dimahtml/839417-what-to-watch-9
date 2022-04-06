@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, MAX_SIMILAR_FILMS_COUNT } from '../../const';
+import { NameSpace, MAX_SIMILAR_FILMS_COUNT, DEFAULT_GENRE } from '../../const';
 import { CinemaData } from '../../types/state';
 
 const initialState: CinemaData = {
@@ -9,7 +9,7 @@ const initialState: CinemaData = {
   promoFilm: null,
   reviews: [],
   isDataLoaded:false,
-  genre: 'All genres',
+  genre: DEFAULT_GENRE,
   error: '',
 };
 

@@ -1,10 +1,14 @@
 export const FILMS_PER_STEP = 8;
 export const TIMEOUT_SHOW_ERROR = 2000;
-export const MIN_MESSAGE_LENGTH = 50;
-export const MAX_MESSAGE_LENGTH = 400;
 export const RATING = 8;
 export const MAX_RATING = 10;
 export const MAX_SIMILAR_FILMS_COUNT = 4;
+export const DEFAULT_GENRE = 'All genres';
+
+export enum MessageLength {
+  Min = 50,
+  Max = 400,
+}
 
 export enum AppRoute {
   AddReview = '/films/:id/review',

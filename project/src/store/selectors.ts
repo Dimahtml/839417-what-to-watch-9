@@ -1,13 +1,14 @@
 import { Film } from '../types/films';
 import { NameSpace } from '../const';
 import { State } from '../types/state';
+import { DEFAULT_GENRE } from '../const';
 
 // функция для получения списка фильмов, подходящих по жанру
 export const getFilmsByActiveGenre = (state: State) => {
   const genre = getActiveGenre(state);
   const films = getFilms(state);
 
-  if (genre === 'All genres') {
+  if (genre === DEFAULT_GENRE) {
     return films;
   }
 
@@ -19,7 +20,7 @@ export const getFilmById = (id: number) => (state: State) =>
   state[NameSpace.data].films.find((film: Film) => film.id === id);
 
 export const getFilmsGenres = (state: State) =>
-  ['All genres', ...new Set(state[NameSpace.data].films.map((film) => film.genre))];
+  [DEFAULT_GENRE, ...new Set(state[NameSpace.data].films.map((film) => film.genre))];
 
 export const getActiveGenre = ((state: State) => state[NameSpace.data].genre);
 

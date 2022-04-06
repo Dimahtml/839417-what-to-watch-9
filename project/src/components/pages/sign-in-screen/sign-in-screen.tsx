@@ -6,7 +6,7 @@ import { setErrorAction, clearErrorAction, loginAction } from '../../../store/ap
 import { AuthData } from '../../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { getAuthorizationStatus } from '../../../store/selectors';
-import { validatePassword } from '../../../utils';
+import { isPasswordValid } from '../../../utils';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 
@@ -24,11 +24,11 @@ function SignInScreen(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (passwordRef.current !== null && !validatePassword(passwordRef.current.value)) {
+    if (passwordRef.current !== null && !isPasswordValid(passwordRef.current.value)) {
       dispatch(setErrorAction('Password must contain at least one letter and one number'));
     }
 
-    if (loginRef.current !== null && passwordRef.current !== null && validatePassword(passwordRef.current.value)) {
+    if (loginRef.current !== null && passwordRef.current !== null && isPasswordValid(passwordRef.current.value)) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,

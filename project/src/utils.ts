@@ -70,7 +70,7 @@ export const getRemainingTime = (percents: number, durationInSec: number | strin
 };
 
 // функция для проверки пароля (должен содержать хотя бы 1 букву и 1 цифру)
-export const validatePassword = (text: string) => {
+export const isPasswordValid = (text: string) => {
   const reg1 = /[A-Za-zА-Яа-я]/;
   const reg2 = /[0-9]/;
 
