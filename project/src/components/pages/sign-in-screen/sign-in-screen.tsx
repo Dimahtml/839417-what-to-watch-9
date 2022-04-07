@@ -33,7 +33,7 @@ function SignInScreen(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
-      dispatch(clearErrorAction);
+      dispatch(clearErrorAction());
     }
   };
 
