@@ -10,6 +10,7 @@ export type UserProcess = {
 export type CinemaData = {
   films: Films,
   similarFilms: Films,
+  favoriteFilms: Films,
   promoFilm: Film | null,
   reviews: Reviews,
   isDataLoaded: boolean,

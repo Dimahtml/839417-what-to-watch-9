@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, MAX_SIMILAR_FILMS_COUNT, DEFAULT_GENRE } from '../../const';
 import { CinemaData } from '../../types/state';
 
 const initialState: CinemaData = {
   films: [],
   similarFilms: [],
+  favoriteFilms: [],
   promoFilm: null,
   reviews: [],
   isDataLoaded:false,
-  genre: 'All genres',
+  genre: DEFAULT_GENRE,
   error: '',
 };
 
@@ -27,7 +28,7 @@ export const cinemaData = createSlice({
       state.isDataLoaded = true;
     },
     loadSimilarFilms: (state, action) => {
-      state.similarFilms = action.payload;
+      state.similarFilms = action.payload.slice(0, MAX_SIMILAR_FILMS_COUNT);
       state.isDataLoaded = true;
     },
     loadReviews: (state, action) => {
@@ -39,7 +40,34 @@ export const cinemaData = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    loadFavoriteFilms: (state, action) => {
+      state.favoriteFilms = [...action.payload];
+    },
+    updateFilm: (state, action) => {
+      state.favoriteFilms = [];
+
+      state.films = state.films.map((film) => {
+        if (film.id === action.payload.id) {
+          return action.payload;
+        }
+        return film;
+      });
+
+      if (state.promoFilm?.id === action.payload.id) {
+        state.promoFilm = action.payload;
+      }
+    },
   },
 });
 
-export const { loadFilm, loadPromoFilm, loadFilms, loadSimilarFilms, loadReviews, changeGenre, setError } = cinemaData.actions;
+export const {
+  loadFilm,
+  loadPromoFilm,
+  loadFilms,
+  loadSimilarFilms,
+  loadFavoriteFilms,
+  updateFilm,
+  loadReviews,
+  changeGenre,
+  setError,
+} = cinemaData.actions;

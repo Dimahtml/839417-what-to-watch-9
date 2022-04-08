@@ -10,14 +10,13 @@ import FilmControl from './film-control/film-control';
 import Tabs from './tabs/tabs';
 import FilmsList from '../../films-list/films-list';
 import { TabTitle } from '../../../const';
-import { getFilmById } from '../../../store/selectors';
+import { getFilmById, getSimilarFilms } from '../../../store/selectors';
 
 function MovieScreen(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
-  const { films } = useAppSelector(({DATA}) => DATA);
-  const film = getFilmById(films, Number(id));
-  const { similarFilms } = useAppSelector(({DATA}) => DATA);
+  const film = useAppSelector(getFilmById(Number(id)));
+  const similarFilms = useAppSelector(getSimilarFilms);
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
   useEffect(() => {

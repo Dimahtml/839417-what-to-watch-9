@@ -1,8 +1,14 @@
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../../hooks';
 import { Film } from '../../../../types/films';
-import { AppRoute } from '../../../../const';
+import { AppRoute, AuthorizationStatus } from '../../../../const';
+import { getAuthorizationStatus } from '../../../../store/selectors';
+import { addFilmToFavoriteAction, removeFilmFromFavoriteAction } from '../../../../store/api-actions';
+import { store } from '../../../../store';
 import UserBlock from '../../../user-block/user-block';
 import Logo from '../../../logo/logo';
+import MyListCheckButton from '../../../my-list-check-button/my-list-check-button';
+import MyListPlusButton from '../../../my-list-plus-button/my-list-plus-button';
 
 type FilmPromoProps = {
   promoFilm: Film | null;
@@ -10,9 +16,29 @@ type FilmPromoProps = {
 
 function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
   const navigate = useNavigate();
+  const id  = promoFilm?.id.toString();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const onPlayerBtnClickHandler = () => navigate(AppRoute.Player);
-  const onMyListBtnClickHandler = () => navigate(AppRoute.MyList);
+  const handlePlayerButtonClick = () => {
+    if (id) {
+      navigate(AppRoute.Player.replace(':id', id));
+    }
+  };
+
+  const handleMyListPlusButtonClick = () => {
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.SignIn);
+    }
+    if (promoFilm) {
+      store.dispatch(addFilmToFavoriteAction(promoFilm));
+    }
+  };
+
+  const handleMyListCheckButtonClick = () => {
+    if (promoFilm) {
+      store.dispatch(removeFilmFromFavoriteAction(promoFilm));
+    }
+  };
 
   return (
     <section className="film-card">
@@ -44,23 +70,18 @@ function FilmPromo({promoFilm}: FilmPromoProps): JSX.Element {
               <button
                 className="btn btn--play film-card__button"
                 type="button"
-                onClick={onPlayerBtnClickHandler}
+                onClick={handlePlayerButtonClick}
               >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
               </button>
-              <button
-                className="btn btn--list film-card__button"
-                type="button"
-                onClick={onMyListBtnClickHandler}
-              >
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
+              {
+                promoFilm?.isFavorite === true ?
+                  <MyListCheckButton onClick={handleMyListCheckButtonClick} /> :
+                  <MyListPlusButton onClick={handleMyListPlusButtonClick} />
+              }
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state.js';
 import { redirectToRoute } from './action';
 import { setError } from '../store/cinema-data/cinema-data';
-import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews } from './cinema-data/cinema-data';
+import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews, loadFavoriteFilms, updateFilm } from './cinema-data/cinema-data';
 import { requireAuthorization } from './user-process/user-process';
 
 import { errorHandle } from '../services/error-handle';
@@ -23,6 +23,20 @@ export const clearErrorAction = createAsyncThunk<void, undefined, {
   (_arg, {dispatch}) => {
     setTimeout(
       () => dispatch(setError('')),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
+
+export const setErrorAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'setError',
+  (message, {dispatch}) => {
+    setTimeout(
+      () => dispatch(setError(message)),
       TIMEOUT_SHOW_ERROR,
     );
   },
@@ -121,6 +135,58 @@ export const addReviewAction = createAsyncThunk<void, PostingReview, {
       const {data} = await api.post<Reviews>(APIRoute.Comments.replace(':id', id), {comment, rating});
       dispatch(loadReviews(data));
       dispatch(redirectToRoute(AppRoute.Film.replace(':id', id)));
+    }
+    catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/fetchFavoriteFilms',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<Films>(APIRoute.FavoriteFilms);
+      dispatch(loadFavoriteFilms(data));
+    } catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const addFilmToFavoriteAction = createAsyncThunk<void, Film, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/addFilmToFavorite',
+  async (film, {dispatch, extra: api}) => {
+    try {
+      const stringID = film.id.toString();
+      const {data} = await api.post<Film>(APIRoute.AddToFavorite.replace(':filmId', stringID).replace(':status', '1'));
+      dispatch(updateFilm(data));
+    }
+    catch(error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const removeFilmFromFavoriteAction = createAsyncThunk<void, Film, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
+}>(
+  'data/removeFilmFromFavorite',
+  async (film, {dispatch, extra: api}) => {
+    try {
+      const stringID = film.id.toString();
+      const {data} = await api.post<Film>(APIRoute.AddToFavorite.replace(':filmId', stringID).replace(':status', '0'));
+      dispatch(updateFilm(data));
     }
     catch(error) {
       errorHandle(error);

@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks';
 import { addReviewAction } from '../../../../store/api-actions';
 
-import { MAX_RATING, RATING, MIN_MESSAGE_LENGTH, MAX_MESSAGE_LENGTH } from '../../../../const';
+import { MAX_RATING, RATING, MessageLength } from '../../../../const';
 import RatingInputs from './rating-inputs/rating-inputs';
-
 
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(RATING);
@@ -31,7 +30,7 @@ function ReviewForm(): JSX.Element {
 
   const handleMessage = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(evt.target.value);
-    if ((message.length < MIN_MESSAGE_LENGTH) || (message.length > MAX_MESSAGE_LENGTH)) {
+    if ((message.length < MessageLength.Min) || (message.length > MessageLength.Max)) {
       setMessageError('Valid message is from 50 to 400 characters');
     } else {
       setMessageError('');

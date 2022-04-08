@@ -1,18 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Films } from '../../../../types/films';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { changeGenre } from '../../../../store/cinema-data/cinema-data';
-import { getActiveGenre } from '../../../../store/selectors';
+import { getActiveGenre, getFilmsGenres } from '../../../../store/selectors';
 
-type GenresListProps = {
-  films: Films;
-}
-
-function GenresList({films}: GenresListProps): JSX.Element {
+function GenresList(): JSX.Element {
   const genre = useAppSelector(getActiveGenre);
   const dispatch = useAppDispatch();
-  const genres: Array<string> = films.map((film) => film.genre);
-  const uniqueGenres: Array<string> = ['All genres', ...new Set(genres)];
+  const uniqueGenres: Array<string> = useAppSelector(getFilmsGenres);
 
   return (
     <ul className="catalog__genres-list">
