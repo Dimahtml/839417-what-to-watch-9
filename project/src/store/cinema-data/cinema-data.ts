@@ -28,8 +28,14 @@ export const cinemaData = createSlice({
       state.isDataLoaded = true;
     },
     loadSimilarFilms: (state, action) => {
-      state.similarFilms = action.payload.slice(0, MAX_SIMILAR_FILMS_COUNT);
+      state.similarFilms = action.payload;
       state.isDataLoaded = true;
+    },
+    removeRepeatingFilm: (state, action) => {
+      state.similarFilms = state.similarFilms.filter((film) => film.id !== action.payload);
+    },
+    sliceSimilarFilms: (state) => {
+      state.similarFilms = state.similarFilms.slice(0, MAX_SIMILAR_FILMS_COUNT);
     },
     loadReviews: (state, action) => {
       state.reviews = action.payload;
@@ -66,6 +72,8 @@ export const {
   loadFilms,
   loadSimilarFilms,
   loadFavoriteFilms,
+  removeRepeatingFilm,
+  sliceSimilarFilms,
   updateFilm,
   loadReviews,
   changeGenre,

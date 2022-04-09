@@ -5,10 +5,20 @@ import { Reviews, PostingReview } from '../types/reviews';
 import { AppDispatch, State } from '../types/state';
 import { redirectToRoute } from './action';
 import { setError } from '../store/cinema-data/cinema-data';
-import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews, loadFavoriteFilms, updateFilm } from './cinema-data/cinema-data';
+import {
+  loadPromoFilm,
+  loadFilm,
+  loadFilms,
+  loadSimilarFilms,
+  loadReviews,
+  loadFavoriteFilms,
+  removeRepeatingFilm,
+  sliceSimilarFilms,
+  updateFilm
+} from './cinema-data/cinema-data';
 import { requireAuthorization } from './user-process/user-process';
 
-import { errorHandle } from '../services/error-handle';
+import { handleError } from '../services/handle-error';
 import { AppRoute, APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { saveToken, dropToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
@@ -53,7 +63,7 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Films>(APIRoute.Films);
       dispatch(loadFilms(data));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -68,8 +78,10 @@ export const fetchSimilarFilmsAction = createAsyncThunk<void, string, {
     try {
       const {data} = await api.get<Films>(APIRoute.SimilarFilms.replace(':id', id));
       dispatch(loadSimilarFilms(data));
+      dispatch(removeRepeatingFilm(Number(id)));
+      dispatch(sliceSimilarFilms());
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -85,7 +97,7 @@ export const fetchFilmAction = createAsyncThunk<void, string, {
       const {data} = await api.get<Film>(APIRoute.Film.replace(':id', id));
       dispatch(loadFilm(data));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
       dispatch(redirectToRoute(AppRoute.NotFound));
     }
   },
@@ -102,7 +114,7 @@ export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Film>(APIRoute.Promo);
       dispatch(loadPromoFilm(data));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -119,7 +131,7 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
       dispatch(loadReviews(data));
     }
     catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -137,7 +149,7 @@ export const addReviewAction = createAsyncThunk<void, PostingReview, {
       dispatch(redirectToRoute(AppRoute.Film.replace(':id', id)));
     }
     catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -153,7 +165,7 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Films>(APIRoute.FavoriteFilms);
       dispatch(loadFavoriteFilms(data));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -171,7 +183,7 @@ export const addFilmToFavoriteAction = createAsyncThunk<void, Film, {
       dispatch(updateFilm(data));
     }
     catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -189,7 +201,7 @@ export const removeFilmFromFavoriteAction = createAsyncThunk<void, Film, {
       dispatch(updateFilm(data));
     }
     catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
@@ -206,7 +218,6 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch(error) {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-      // errorHandle(error);
     }
   },
 );
@@ -224,7 +235,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.Main));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
   },
@@ -242,7 +253,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
       dropToken();
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch(error) {
-      errorHandle(error);
+      handleError(error);
     }
   },
 );
