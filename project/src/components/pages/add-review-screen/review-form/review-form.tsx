@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../../../hooks';
 import { addReviewAction } from '../../../../store/api-actions';
-import { setErrorAction } from '../../../../store/api-actions';
 import { MAX_RATING, RATING, MessageLength } from '../../../../const';
 import RatingInputs from './rating-inputs/rating-inputs';
 
@@ -22,12 +21,8 @@ function ReviewForm(): JSX.Element {
     evt.preventDefault();
 
     if (rating !== undefined && messageError === '' && id) {
-      try {
-        setIsFormDisable(true);
-        await dispatch(addReviewAction({comment: message, rating, id}));
-      } catch {
-        dispatch(setErrorAction('ERROR! Form was not submitted'));
-      }
+      setIsFormDisable(true);
+      await dispatch(addReviewAction({comment: message, rating, id}));
     }
   };
 

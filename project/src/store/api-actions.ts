@@ -149,7 +149,9 @@ export const addReviewAction = createAsyncThunk<void, PostingReview, {
       dispatch(redirectToRoute(AppRoute.Film.replace(':id', id)));
     }
     catch(error) {
+      dispatch(setErrorAction('Error! Form was not submitted.'));
       handleError(error);
+      throw error;
     }
   },
 );
