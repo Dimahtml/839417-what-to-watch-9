@@ -1,17 +1,19 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { useAppDispatch } from '../../../../hooks';
 import { addReviewAction } from '../../../../store/api-actions';
-
+import { setErrorAction } from '../../../../store/api-actions';
 import { MAX_RATING, RATING, MessageLength } from '../../../../const';
 import RatingInputs from './rating-inputs/rating-inputs';
 
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState(RATING);
   const [message, setMessage] = useState('');
+  const [isFormDisable, setIsFormDisable] = useState(false);
   const [messageDirty, setMessageDirty] = useState(false);
   const [messageError, setMessageError] = useState('Message can`t be empty');
-  const [formValid, setFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const dispatch = useAppDispatch();
   const { id } = useParams<{id: string}>();
@@ -21,9 +23,10 @@ function ReviewForm(): JSX.Element {
 
     if (rating !== undefined && messageError === '' && id) {
       try {
+        setIsFormDisable(true);
         await dispatch(addReviewAction({comment: message, rating, id}));
       } catch {
-        setMessageError('ERROR! Form was not submitted');
+        dispatch(setErrorAction('ERROR! Form was not submitted'));
       }
     }
   };
@@ -47,9 +50,9 @@ function ReviewForm(): JSX.Element {
 
   useEffect(() => {
     if (messageError || rating === 0) {
-      setFormValid(false);
+      setIsFormValid(false);
     } else {
-      setFormValid(true);
+      setIsFormValid(true);
     }
   }, [messageError, rating]);
 
@@ -74,7 +77,7 @@ function ReviewForm(): JSX.Element {
           onBlur={handleBlur}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={!formValid}>Post</button>
+          <button className="add-review__btn" type="submit" disabled={!isFormValid || isFormDisable}>Post</button>
         </div>
       </div>
     </form>
