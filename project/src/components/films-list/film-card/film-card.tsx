@@ -19,21 +19,19 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
       onMouseEnter={mouseEnterHandler}
       onMouseLeave={mouseLeaveHandler}
     >
-      <div className="small-film-card__image">
-        <VideoPlayer
-          isPlaying={isActive}
-          src={film.previewVideoLink}
-          poster={film.previewImage}
-          width={280}
-          height={175}
-          muted
-        />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>
-          {film.name}
-        </Link>
-      </h3>
+      <Link className="small-film-card__link" to={`/films/${film.id}`}>
+        <div className="small-film-card__image">
+          <VideoPlayer
+            isPlaying={isActive}
+            src={film.previewVideoLink}
+            poster={film.previewImage}
+            width={280}
+            height={175}
+            muted
+          />
+        </div>
+        <h3 className="small-film-card__title">{film.name}</h3>
+      </Link>
     </article>
   );
 }

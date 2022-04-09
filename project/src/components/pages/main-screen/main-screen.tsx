@@ -57,7 +57,7 @@ function MainScreen(): JSX.Element {
           {showedFilms.length < activeFilms.length
           && <ShowMoreButton onClick={handleClick} />}
         </section>
-        <PageFooter />
+        <PageFooter isDisabledLogo />
       </div>
     </React.Fragment>
   );

@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRoute from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 import MainScreen from '../pages/main-screen/main-screen';
@@ -14,7 +14,7 @@ import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
   return (
-    <HistoryRouter history={browserHistory}>
+    <HistoryRoute history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main} element={<MainScreen />} />
         <Route
@@ -38,7 +38,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.SignIn} element={<SignInScreen />} />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
-    </HistoryRouter>
+    </HistoryRoute>
   );
 }
 

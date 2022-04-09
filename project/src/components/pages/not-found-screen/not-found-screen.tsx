@@ -1,5 +1,4 @@
-import {Link} from 'react-router-dom';
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 function NotFoundScreen(): JSX.Element {
   return (

@@ -1,12 +1,15 @@
+import { useEffect } from 'react';
+
 import { useAppSelector } from '../../../hooks';
+import { store } from '../../../store';
 import { getFavoriteFilms } from '../../../store/selectors';
+import { Film } from '../../../types/films';
+import { fetchFavoriteFilmsAction } from '../../../store/api-actions';
+
+import UserBlock from '../../user-block/user-block';
 import FilmCard from '../../films-list/film-card/film-card';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
-import { Film } from '../../../types/films';
-import { store } from '../../../store';
-import { fetchFavoriteFilmsAction } from '../../../store/api-actions';
-import { useEffect } from 'react';
 
 function MyListScreen(): JSX.Element {
   useEffect(() => {
@@ -22,16 +25,7 @@ function MyListScreen(): JSX.Element {
 
         <h1 className="page-title user-page__title">My list</h1>
 
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </li>
-          <li className="user-block__item">
-            <a href="/" className="user-block__link">Sign out</a>
-          </li>
-        </ul>
+        <UserBlock />
       </header>
 
       <section className="catalog">

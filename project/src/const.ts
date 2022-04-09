@@ -1,6 +1,6 @@
 export const FILMS_PER_STEP = 8;
 export const TIMEOUT_SHOW_ERROR = 2000;
-export const RATING = 8;
+export const RATING = 0;
 export const MAX_RATING = 10;
 export const MAX_SIMILAR_FILMS_COUNT = 4;
 export const DEFAULT_GENRE = 'All genres';
@@ -47,9 +47,9 @@ export enum APIRoute {
 }
 
 export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export enum NameSpace {

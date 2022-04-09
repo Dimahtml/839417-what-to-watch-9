@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Film, Films } from '../types/films';
 import { Reviews, PostingReview } from '../types/reviews';
-import { AppDispatch, State } from '../types/state.js';
+import { AppDispatch, State } from '../types/state';
 import { redirectToRoute } from './action';
 import { setError } from '../store/cinema-data/cinema-data';
 import { loadPromoFilm, loadFilm, loadFilms, loadSimilarFilms, loadReviews, loadFavoriteFilms, updateFilm } from './cinema-data/cinema-data';
@@ -202,11 +202,11 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
       await api.get(APIRoute.Login);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch(error) {
-      errorHandle(error);
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      // errorHandle(error);
     }
   },
 );

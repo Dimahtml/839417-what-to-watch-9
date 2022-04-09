@@ -57,6 +57,7 @@ function PlayerScreen(): JSX.Element {
         width="100%"
         height="100%"
         muted={false}
+        autoPlay
         onTimeUpdate={() => {
           video = videoRef.current;
 
@@ -101,7 +102,7 @@ function PlayerScreen(): JSX.Element {
           >
             {isActive? <PauseButton /> : <PlayButton />}
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{film?.name}</div>
 
           <button
             type="button"

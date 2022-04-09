@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const PREVIEW_DELAY = 1000;
 
@@ -12,22 +12,13 @@ type VideoPlayerProps = {
 }
 
 function VideoPlayer({isPlaying, src, muted, poster, width, height}: VideoPlayerProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLoading, setIsLoading] = useState(true);
-
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  useEffect(() => {
+  useEffect(() => () => {
     if (videoRef.current !== null) {
-      videoRef.current.onloadeddata = () => setIsLoading(false);
+      videoRef.current.onloadeddata = null;
+      videoRef.current = null;
     }
-
-    return () => {
-      if (videoRef.current !== null) {
-        videoRef.current.onloadeddata = null;
-        videoRef.current = null;
-      }
-    };
   }, [src]);
 
   useEffect(() => {

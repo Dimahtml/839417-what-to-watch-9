@@ -19,6 +19,10 @@ function MovieScreen(): JSX.Element {
   const similarFilms = useAppSelector(getSimilarFilms);
   const [activeTab, setActiveTab] = useState<TabTitle>(TabTitle.Overview);
 
+  const divStyle = {
+    backgroundColor: `${film?.backgroundColor}`,
+  };
+
   useEffect(() => {
     if (id && !film) {
       dispatch(fetchFilmAction(id));
@@ -38,7 +42,7 @@ function MovieScreen(): JSX.Element {
 
   return (
     <React.Fragment>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={divStyle}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film?.backgroundImage} alt={film?.name} />
