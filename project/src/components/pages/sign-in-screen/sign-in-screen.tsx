@@ -43,12 +43,9 @@ function SignInScreen(): JSX.Element {
       setLoginCorrect(false);
     }
     if (passwordRef.current !== null && !isPasswordValid(passwordRef.current.value)) {
+      dispatch(setErrorAction('Password must contain at least one letter and one number'));
       setPasswordCorrect(false);
     }
-    if (passwordRef.current !== null && !passwordCorrect) {
-      dispatch(setErrorAction('Password must contain at least one letter and one number'));
-    }
-
     if (
       loginRef.current !== null
       && passwordRef.current !== null
