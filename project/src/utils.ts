@@ -82,13 +82,18 @@ export const isPasswordValid = (text: string) => {
 };
 
 // функция для проверки пароля (должен содержать хотя бы 1 букву и 1 цифру)
-export const isLoginValid = (text: string) => {
-  const reg1 = /[@]/;
+// export const isLoginValid = (text: string) => {
+//   const reg1 = /[@]/;
 
-  if (!text.match(reg1)) {
-    return false;
-  }
+//   if (!text.match(reg1)) {
+//     return false;
+//   }
 
-  return true;
-};
+//   return true;
+// };
+
+export const isLoginValid = (text: string) =>
+  String(text).toLowerCase().match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  );
 

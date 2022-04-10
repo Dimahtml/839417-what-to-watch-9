@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { setErrorAction, clearErrorAction, loginAction } from '../../../store/api-actions';
+import { loginAction } from '../../../store/api-actions';
 import { AuthData } from '../../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { getAuthorizationStatus } from '../../../store/selectors';
@@ -43,7 +43,6 @@ function SignInScreen(): JSX.Element {
       setLoginCorrect(false);
     }
     if (passwordRef.current !== null && !isPasswordValid(passwordRef.current.value)) {
-      dispatch(setErrorAction('Password must contain at least one letter and one number'));
       setPasswordCorrect(false);
     }
     if (
@@ -56,7 +55,6 @@ function SignInScreen(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
-      dispatch(clearErrorAction());
     }
   };
 
@@ -87,7 +85,7 @@ function SignInScreen(): JSX.Element {
           {
             !passwordCorrect && (
               <div className="sign-in__message">
-                <p>Please enter a valid password</p>
+                <p>Password must contain at least one letter and one number</p>
               </div>
             )
           }
