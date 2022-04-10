@@ -80,3 +80,15 @@ export const isPasswordValid = (text: string) => {
 
   return true;
 };
+
+// функция для проверки пароля (должен содержать хотя бы 1 букву и 1 цифру)
+export const isLoginValid = (text: string) => {
+  const reg1 = /[@]/;
+
+  if (!text.match(reg1)) {
+    return false;
+  }
+
+  return true;
+};
+

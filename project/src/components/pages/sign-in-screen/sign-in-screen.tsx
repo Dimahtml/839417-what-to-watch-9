@@ -1,4 +1,4 @@
-import { useRef, useEffect, FormEvent } from 'react';
+import { useRef, useEffect, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks';
@@ -6,7 +6,7 @@ import { setErrorAction, clearErrorAction, loginAction } from '../../../store/ap
 import { AuthData } from '../../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { getAuthorizationStatus } from '../../../store/selectors';
-import { isPasswordValid } from '../../../utils';
+import { isPasswordValid, isLoginValid } from '../../../utils';
 import PageFooter from '../../page-footer/page-footer';
 import Logo from '../../logo/logo';
 
@@ -17,18 +17,44 @@ function SignInScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
+  const [loginCorrect, setLoginCorrect] = useState(true);
+  const [passwordCorrect, setPasswordCorrect] = useState(true);
+
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
+  };
+
+  const handleLoginInputChange = () => {
+    if (loginRef.current !== null && isLoginValid(loginRef.current.value)) {
+      setLoginCorrect(true);
+    }
+  };
+
+  const handlePasswordInputChange = () => {
+    if (passwordRef.current !== null && isPasswordValid(passwordRef.current.value)) {
+      setPasswordCorrect(true);
+    }
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
+    if (loginRef.current !== null && !isLoginValid(loginRef.current.value)) {
+      setLoginCorrect(false);
+    }
     if (passwordRef.current !== null && !isPasswordValid(passwordRef.current.value)) {
+      setPasswordCorrect(false);
+    }
+    if (passwordRef.current !== null && !passwordCorrect) {
       dispatch(setErrorAction('Password must contain at least one letter and one number'));
     }
 
-    if (loginRef.current !== null && passwordRef.current !== null && isPasswordValid(passwordRef.current.value)) {
+    if (
+      loginRef.current !== null
+      && passwordRef.current !== null
+      && isPasswordValid(passwordRef.current.value)
+      && loginCorrect
+    ) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
@@ -53,21 +79,40 @@ function SignInScreen(): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+          {
+            !loginCorrect && (
+              <div className="sign-in__message">
+                <p>Please enter a valid email address</p>
+              </div>
+            )
+          }
+
+          {
+            !passwordCorrect && (
+              <div className="sign-in__message">
+                <p>Please enter a valid password</p>
+              </div>
+            )
+          }
+
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div className={loginCorrect ? 'sign-in__field' : 'sign-in__field--error'}>
               <input
                 ref={loginRef}
+                onChange={handleLoginInputChange}
+                autoComplete={'off'}
                 className="sign-in__input"
-                type="email"
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                type="email"
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className="sign-in__field">
+            <div className={passwordCorrect ? 'sign-in__field' : 'sign-in__field--error'}>
               <input
                 ref={passwordRef}
+                onChange={handlePasswordInputChange}
                 className="sign-in__input"
                 type="password"
                 placeholder="Password"
