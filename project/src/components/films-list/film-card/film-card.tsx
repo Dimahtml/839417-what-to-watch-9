@@ -10,14 +10,14 @@ type FilmCardProps = {
 function FilmCard({film}: FilmCardProps): JSX.Element {
   const [isActive, setActive] = useState(false);
 
-  const mouseEnterHandler = () => setActive(true);
-  const mouseLeaveHandler = () => setActive(false);
+  const handleMouseEnter = () => setActive(true);
+  const handleMouseLeave = () => setActive(false);
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={mouseEnterHandler}
-      onMouseLeave={mouseLeaveHandler}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <Link className="small-film-card__link" to={`/films/${film.id}`}>
         <div className="small-film-card__image">

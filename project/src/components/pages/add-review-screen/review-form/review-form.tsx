@@ -29,7 +29,7 @@ function ReviewForm(): JSX.Element {
   const handleMessage = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(evt.target.value);
     if ((message.length < MessageLength.Min) || (message.length > MessageLength.Max)) {
-      setMessageError('Valid message is from 50 to 400 characters');
+      setMessageError(`Valid message is from ${MessageLength.Min} to ${MessageLength.Max} characters`);
     } else {
       setMessageError('');
     }

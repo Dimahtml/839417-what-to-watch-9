@@ -37,7 +37,7 @@ function PlayerScreen(): JSX.Element {
     }
   };
 
-  const toggleFullScreen = () => {
+  const handleFullScreenToggle = () => {
     if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen();
     } else {
@@ -107,7 +107,7 @@ function PlayerScreen(): JSX.Element {
           <button
             type="button"
             className="player__full-screen"
-            onClick={toggleFullScreen}
+            onClick={handleFullScreenToggle}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
