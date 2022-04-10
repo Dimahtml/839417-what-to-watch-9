@@ -17,23 +17,23 @@ export const getFilmsByActiveGenre = (state: State) => {
 
 // функция для получения фильма из списка фильмов по его id
 export const getFilmById = (id: number) => (state: State) =>
-  state[NameSpace.data].films.find((film: Film) => film.id === id);
+  state[NameSpace.Data].films.find((film: Film) => film.id === id);
 
 export const getFilmsGenres = (state: State) =>
-  [DEFAULT_GENRE, ...new Set(state[NameSpace.data].films.map((film) => film.genre))];
+  [DEFAULT_GENRE, ...new Set(state[NameSpace.Data].films.map((film) => film.genre))];
 
-export const getActiveGenre = ((state: State) => state[NameSpace.data].genre);
+export const getActiveGenre = ((state: State) => state[NameSpace.Data].genre);
 
-export const getErrorMessage = ((state: State) => state[NameSpace.data].error);
+export const getErrorMessage = ((state: State) => state[NameSpace.Data].error);
 
-export const getFilms = ((state: State) => state[NameSpace.data].films);
+export const getFilms = ((state: State) => state[NameSpace.Data].films);
 
-export const getFavoriteFilms = ((state: State) => state[NameSpace.data].favoriteFilms);
+export const getFavoriteFilms = ((state: State) => state[NameSpace.Data].favoriteFilms);
 
-export const getSimilarFilms = ((state: State) => state[NameSpace.data].similarFilms);
+export const getSimilarFilms = ((state: State) => state[NameSpace.Data].similarFilms);
 
-export const getPromoFilm = ((state: State) => state[NameSpace.data].promoFilm);
+export const getPromoFilm = ((state: State) => state[NameSpace.Data].promoFilm);
 
-export const getAuthorizationStatus = ((state: State) => state[NameSpace.user].authorizationStatus);
+export const getAuthorizationStatus = ((state: State) => state[NameSpace.User].authorizationStatus);
 
-export const getIsDataLoaded = ((state: State) => state[NameSpace.data].isDataLoaded);
+export const getIsDataLoaded = ((state: State) => state[NameSpace.Data].isDataLoaded);

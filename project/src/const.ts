@@ -46,13 +46,13 @@ export enum APIRoute {
   NotFound = '/notfound',
 }
 
-export enum HTTP_CODE {
+export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
   NotFound = 404,
 }
 
 export enum NameSpace {
-  data = 'DATA',
-  user = 'USER',
+  Data = 'DATA',
+  User = 'USER',
 }

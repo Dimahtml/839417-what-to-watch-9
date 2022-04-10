@@ -14,7 +14,7 @@ const initialState: CinemaData = {
 };
 
 export const cinemaData = createSlice({
-  name: NameSpace.data,
+  name: NameSpace.Data,
   initialState,
   reducers: {
     loadFilm: (state, action) => {
