@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
+import { getAuthorizationStatus, getUserData } from '../../store/selectors';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-actions';
@@ -7,7 +9,8 @@ import { logoutAction } from '../../store/api-actions';
 function UserBlock(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
 
   const handleAvatarClick = () => navigate(AppRoute.MyList);
 
@@ -27,7 +30,7 @@ function UserBlock(): JSX.Element {
     <ul className="user-block">
       <li className="user-block__item">
         <div className="user-block__avatar" onClick={handleAvatarClick}>
-          <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+          <img src={userData?.avatarUrl} alt="User avatar" width="63" height="63" />
         </div>
       </li>
       <li className="user-block__item">

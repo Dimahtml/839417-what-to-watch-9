@@ -23,6 +23,7 @@ function ReviewForm(): JSX.Element {
     if (rating !== undefined && messageError === '' && id) {
       setIsFormDisable(true);
       await dispatch(addReviewAction({comment: message, rating, id}));
+      setIsFormDisable(false);
     }
   };
 

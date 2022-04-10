@@ -2,9 +2,11 @@ import { store } from '../store/index';
 import { AuthorizationStatus } from '../const';
 import { Film, Films } from './films';
 import { Reviews } from './reviews';
+import { UserData } from './user-data';
 
 export type UserProcess = {
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus,
+  user?: UserData,
 };
 
 export type CinemaData = {

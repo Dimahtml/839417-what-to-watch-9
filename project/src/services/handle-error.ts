@@ -3,7 +3,8 @@ import { store } from '../store';
 import { setError } from '../store/cinema-data/cinema-data';
 import { clearErrorAction } from '../store/api-actions';
 import { ErrorType } from '../types/error';
-import { HttpCode } from '../const';
+import { AppRoute, HttpCode } from '../const';
+import { redirectToRoute } from '../store/action';
 
 export const handleError = (error: ErrorType): void => {
   if (!request.isAxiosError(error)) {
@@ -25,5 +26,7 @@ export const handleError = (error: ErrorType): void => {
         errorHandle(response.data.error);
         break;
     }
+  } else {
+    store.dispatch(redirectToRoute(AppRoute.ServerError));
   }
 };

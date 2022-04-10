@@ -13,7 +13,7 @@ function PlayerScreen(): JSX.Element {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [percent, setPercent] = useState(0);
-  const [isActive, setActive] = useState(false);
+  const [isActive, setActive] = useState(true);
   const { id } = useParams<{id: string}>();
   const film = useAppSelector(getFilmById(Number(id)));
   const videoRef = useRef<HTMLVideoElement | null>(null);

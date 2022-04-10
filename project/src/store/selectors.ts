@@ -1,7 +1,7 @@
 import { Film } from '../types/films';
 import { NameSpace } from '../const';
 import { State } from '../types/state';
-import { DEFAULT_GENRE } from '../const';
+import { DEFAULT_GENRE, MAX_GENRES_COUNT } from '../const';
 
 // функция для получения списка фильмов, подходящих по жанру
 export const getFilmsByActiveGenre = (state: State) => {
@@ -20,7 +20,7 @@ export const getFilmById = (id: number) => (state: State) =>
   state[NameSpace.Data].films.find((film: Film) => film.id === id);
 
 export const getFilmsGenres = (state: State) =>
-  [DEFAULT_GENRE, ...new Set(state[NameSpace.Data].films.map((film) => film.genre))];
+  [DEFAULT_GENRE, ...new Set(state[NameSpace.Data].films.map((film) => film.genre).slice(0, MAX_GENRES_COUNT))];
 
 export const getActiveGenre = ((state: State) => state[NameSpace.Data].genre);
 
@@ -37,3 +37,5 @@ export const getPromoFilm = ((state: State) => state[NameSpace.Data].promoFilm);
 export const getAuthorizationStatus = ((state: State) => state[NameSpace.User].authorizationStatus);
 
 export const getIsDataLoaded = ((state: State) => state[NameSpace.Data].isDataLoaded);
+
+export const getUserData = ((state: State) => state[NameSpace.User].user) ;

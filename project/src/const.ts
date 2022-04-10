@@ -3,6 +3,7 @@ export const TIMEOUT_SHOW_ERROR = 2000;
 export const RATING = 0;
 export const MAX_RATING = 10;
 export const MAX_SIMILAR_FILMS_COUNT = 4;
+export const MAX_GENRES_COUNT = 10;
 export const DEFAULT_GENRE = 'All genres';
 
 export enum MessageLength {
@@ -18,6 +19,7 @@ export enum AppRoute {
   Player = '/player/:id',
   SignIn = '/login',
   NotFound = '/404',
+  ServerError = '/500',
 }
 
 export enum AuthorizationStatus {
@@ -50,6 +52,7 @@ export enum HttpCode {
   BadRequest = 400,
   Unauthorized = 401,
   NotFound = 404,
+  ServerError = 500,
 }
 
 export enum NameSpace {

@@ -11,6 +11,7 @@ import PlayerScreen from '../pages/player-screen/player-screen';
 import SignInScreen from '../pages/sign-in-screen/sign-in-screen';
 import NotFoundScreen from '../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
+import ServerErrorScreen from '../pages/server-error-screen/server-error-screen';
 
 function App(): JSX.Element {
   return (
@@ -36,6 +37,7 @@ function App(): JSX.Element {
         />
         <Route path={AppRoute.Player} element={<PlayerScreen />} />
         <Route path={AppRoute.SignIn} element={<SignInScreen />} />
+        <Route path={AppRoute.ServerError} element={<ServerErrorScreen />} />
         <Route path="*" element={<NotFoundScreen />} />
       </Routes>
     </HistoryRoute>
